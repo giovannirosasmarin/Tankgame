@@ -1,103 +1,161 @@
 package Objects;
+import Animacion.SpriteSheet;
+import window.tankGame;
 
-import framework.GameObject;
-import framework.ObjectId;
-
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.Observable;
-import java.util.Observer;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 /**
  *
  * @author anthony-pc
  */
-public class Tank extends GameObject {
 
+//Modified to fit with my keyInput and main tankGame class
+public class Tank  {
 
-    public Tank(int x, int y, int vx, int vy, short angle, ObjectId id) {
-        super ( x, y, vx, vy, angle, id );
+    private int x;
+    private int y;
+    private final int r = 3;
+    private int vx;
+    private int vy;
+    private short angle;
+    private BufferedImage Tank1;
+    private boolean UpPressed;
+    private boolean DownPressed;
+    private boolean RightPressed;
+    private boolean LeftPressed;
+
+    public Tank(int x, int y, int vx, int vy, short angle, tankGame game) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.angle = angle;
+
+        SpriteSheet ss =new SpriteSheet ( game.getSpriteSheet ());
+        Tank1 = ss.grabImage ( 1,1,32,32 );
+
     }
-    private float width =48 , height =96;
-    @Override
-    public void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
-
-        g.setColor ( Color.red );
-        g.fillRect ( (int)x,(int)y,(int)width, (int)height );
-
-        Graphics2D g2d= (Graphics2D)g;
-
-        System.out.println(this.toString());
-
-
-
-    }
-
-    @Override
-    public void update(Observable o, Object o1) {
+    public void tick(){
+        // x++;
         if (this.UpPressed) {
-            this.moveForwards();
+            vx = (int) Math.round(r * Math.cos(Math.toRadians(angle)));
+            vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
+            x+= vx;
+            y+= vy;
         }
+
         if (this.DownPressed) {
-            this.moveBackwards();
+            vx = (int) Math.round(r * Math.cos(Math.toRadians(angle)));
+            vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
+            x -= vx;
+            y -= vy;
         }
 
         if (this.LeftPressed) {
-            this.rotateLeft();
+            this.angle -= 3;
         }
         if (this.RightPressed) {
-            this.rotateRight();
+            this.angle += 3;
         }
-        this.repaint();
+
+//border collision of player
+        if(x<=0)
+            x=0;
+        if(x>=640-20)
+            x=640-20;
+        if (y<=0)
+            y=0;
+        if(y>=480-32)
+            y=480-32;
+    }
+    public double  getX() {
+        return x;
     }
 
-    private void rotateLeft() {
-        this.angle -= 3;
+
+    public  double getY() {
+        return y;
     }
 
-    private void rotateRight() {
-        this.angle += 3;
+
+    public void setX(int x) {
+        this.x = x;
     }
 
-    private void moveBackwards() {
-        vx = (int) Math.round(r * Math.cos(Math.toRadians(angle)));
-        vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
-        x -= vx;
-        y -= vy;
-        checkBorder();
+    public void setY(int y) {
+        this.y = y;
     }
 
-    private void moveForwards() {
-        vx = (int) Math.round(r * Math.cos(Math.toRadians(angle)));
-        vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
-        x += vx;
-        y += vy;
-        checkBorder();
+    public void setVx(int vx) {
+        this.vx = vx;
     }
 
-    private void checkBorder() {
-        if (x < 0) {
-            x = 0;
-        }
-        if (x >= 740) {
-            x = 740;
-        }
-        if (y < 0) {
-            y = 0;
-        }
-        if (y >= 720) {
-            y = 720;
-        }
+    public void setVy(int vy) {
+        this.vy = vy;
     }
 
-    @Override
-    public String toString() {
-        return "x=" + x + ", y=" + y + ", angle=" + angle;
+    public void setAngle(short angle) {
+        this.angle = angle;
     }
+
+
+    public void toggleUpPressed() {
+        this.UpPressed = true;
+    }
+
+    public void toggleDownPressed() {
+        this.DownPressed = true;
+    }
+
+    public void toggleRightPressed() {
+        this.RightPressed = true;
+    }
+
+    public void toggleLeftPressed() {
+        this.LeftPressed = true;
+    }
+
+    public void unToggleUpPressed() {
+        this.UpPressed = false;
+    }
+
+    public void unToggleDownPressed() {
+        this.DownPressed = false;
+    }
+
+    public void unToggleRightPressed() {
+        this.RightPressed = false;
+    }
+
+    public void unToggleLeftPressed() {
+        this.LeftPressed = false;
+    }
+
+
+    public void render (Graphics g) {
+
+
+
+        AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
+        rotation.rotate(Math.toRadians(angle), Tank1.getWidth() / 2, Tank1.getHeight() / 2);
+        Graphics2D graphic2D = (Graphics2D) g;
+        graphic2D.drawImage( Tank1, rotation, null);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 }

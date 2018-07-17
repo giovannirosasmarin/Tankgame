@@ -1,14 +1,13 @@
 package framework;
 
 import window.tankGame;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class KeyInput extends KeyAdapter {
+public class keyInput extends KeyAdapter {
 
     tankGame game;
-    public KeyInput(tankGame game){
+    public keyInput(tankGame game){
         this.game = game;
     }
 
@@ -16,6 +15,6 @@ public class KeyInput extends KeyAdapter {
         game.keyPressed ( e );
     }
     public void keyReleased(KeyEvent e){
-game.keyReleased ( e );
+        game.keyReleased ( e );
     }
 }

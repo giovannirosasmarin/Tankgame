@@ -1,27 +1,30 @@
 package Objects;
 
 import window.tankGame;
-
 import java.awt.*;
 import java.util.LinkedList;
 
-public class Controller {
+public class BulletControl {
 
     private LinkedList<Bullet> b = new LinkedList<Bullet> (  );
 
     Bullet TempBullet;
     tankGame game;
-    public Controller(tankGame game){
+
+
+    public BulletControl(tankGame game)
+    {
         this.game = game;
 //        addBullet (  new Bullet ( 100,300,game ) );
     }
 
-    public void tick(){
-        for (int i= 0;i<b.size ();i++){
+    public void update(){
+        for (int i= 0;i<b.size ();i++)
+        {
             TempBullet = b.get ( i );
             if(TempBullet.getX ()<0)
                 removeBullet ( TempBullet );
-            TempBullet.tick ();
+            TempBullet.update ();
         }
     }
 
@@ -33,11 +36,13 @@ public class Controller {
             TempBullet.render (g);
         }
     }
-    public void addBullet(Bullet block){
-        b.add(block);
+    public void addBullet(Bullet b)
+    {
+       this.b.add(b);
     }
-    public void removeBullet(Bullet block){
-        b.remove (block);
+    public void removeBullet(Bullet b)
+    {
+        this.b.remove (b);
     }
 
 

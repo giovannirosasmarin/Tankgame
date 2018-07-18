@@ -1,6 +1,7 @@
 package window;
 import Animacion.BufferedImageLoader;
 import Objects.*;
+import TankGameExtras.Health;
 import framework.keyInput;
 import java.awt.*; //canvas
 import java.awt.event.KeyEvent;
@@ -17,16 +18,25 @@ public class tankGame extends Canvas implements Runnable {
     private BufferedImage spriteSheet = null; //tank.png spritesheet
     private BufferedImage background = null;// background of the window
 
+
+
+
+    private BufferedImage leftHalf = null;
+    private BufferedImage rightHalf = null;
+
+
+    private Health hp,hp2;
     private Tank p;
     private BulletControl bc;
     private Enemy p2;
     private Wall w1;
-    public static int W, H;
+    private static int W, H;
+    private static int sw, sh;
 
 
 //---------------------------------------------------------------------------------------
 
-    public void init()
+    private void init()
     {
         requestFocus ();
         W =getWidth ();
@@ -35,15 +45,19 @@ public class tankGame extends Canvas implements Runnable {
         try{
             spriteSheet = loader.loadImage (".\\res\\tank.png");//tank.png spritesheet
             background = loader.loadImage (".\\res\\back.png");// background of the window
+
         }catch (IOException e){
             e.printStackTrace ();
         }
 
 
-        p = new Tank (600, 400, 0, 0, (short)0,this);// Tank
-        p2 = new Enemy(0, 0, 0, 0, (short)0,this);  //enemy
+
+        p = new Tank (1180, 860, 0, 0, (short)-90,this);// Tank
+        p2 = new Enemy(100, 100, 0, 0, (short)90,this);  //enemy
+        hp = new Health ( 100,36,this );
+        hp2 = new Health ( 1050,36,this );
         bc = new BulletControl (this);   //bullet
-        w1 = new Wall ( 32,100,this ); //walls
+        w1 = new Wall ( 32,100,(short)0,this ); //walls
 
         addKeyListener ( new keyInput (this) ); //adding key Listener for the key input
 
@@ -63,7 +77,7 @@ public class tankGame extends Canvas implements Runnable {
 
     //---------------------------------------------------------------------------------------
     //not needed has much
-    public synchronized void stop()
+    private synchronized void stop()
     {
         if(!running) //if running its false it will get out of the method
             return;
@@ -84,7 +98,6 @@ public class tankGame extends Canvas implements Runnable {
     @Override // implemented runnable
     public void run()
     {
-
         init();
 
         long lastTime = System.nanoTime ();
@@ -123,6 +136,7 @@ public class tankGame extends Canvas implements Runnable {
     //---------------------------------------------------------------------------------------
     private void render()//everything in the game that renders
     {
+
         BufferStrategy bs = this.getBufferStrategy (); //this refering to canvas  //getBufferStrategy returns a bufferStrategy
 
         if(bs == null )
@@ -132,13 +146,19 @@ public class tankGame extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics (); //draws are buffers
-        ////////////////////////////////////
+        Graphics2D g2d= (Graphics2D)g;
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //        g.drawImage ( image,0,0,getWidth (),getHeight (),this );      //old background color green it was black at first
 //        g.setColor ( Color.green );
 //        g.fillRect ( 0,0,800,800 );
 
         g.drawImage ( background,0,0,getWidth (),getHeight (),null); // background of the window
+
+        g.drawImage ( leftHalf,0,0,0,0,null);
+        g.drawImage ( rightHalf,0,0,getWidth ()/2,0,null);
+
 
 //        g.drawImage ( player,100,100,this );
 
@@ -151,7 +171,15 @@ public class tankGame extends Canvas implements Runnable {
 //walls
         w1.render ( g );
 
-        ////////////////////////////////
+        hp.render ( g );
+
+        hp2.render ( g );
+
+        g2d.scale ( .2,.2); // for mini map scale ?????
+//        g2d. drawImage (  )
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         g.dispose ();
         bs.show ();
 
@@ -168,12 +196,17 @@ public class tankGame extends Canvas implements Runnable {
         bc.update ();
 //walls
         w1.update ( );
+
+        hp.update ( );
+
+        hp2.update ();
+
     }
 //--------------------------------------------------------------------------------------------------
 
     public static void main (String args[])
     {
-        new Window ( 640, 480,"Tank Game", new tankGame () ); // initializing the window
+        new Window ( 1280, 960,"Tank Game", new tankGame () ); // initializing the window
 
     }
     //---------------------------------------------------------------------------------------
@@ -191,7 +224,7 @@ public class tankGame extends Canvas implements Runnable {
         } else if(key == KeyEvent.VK_W) {
             p2.toggleUpPressed();
         } else if(key == KeyEvent.VK_SPACE){
-            bc.addBullet ( new Bullet (p2.getX ()-32,p2.getY(),this) );
+            bc.addBullet ( new Bullet (p2.getX (),p2.getY(), p2.getAngle (), this) );
         }
 //tank
         if(key == KeyEvent.VK_RIGHT) {
@@ -203,7 +236,7 @@ public class tankGame extends Canvas implements Runnable {
         } else if(key == KeyEvent.VK_UP) {
             p.toggleUpPressed();
         } else if(key == KeyEvent.VK_SHIFT){
-            bc.addBullet ( new Bullet (p.getX ()-32,p.getY(),this) );
+            bc.addBullet ( new Bullet (p.getX (),p.getY(),p.getAngle (),this) );
         }
     }
 
@@ -238,4 +271,7 @@ public class tankGame extends Canvas implements Runnable {
     {
         return spriteSheet;
     }
+
+
+
 }

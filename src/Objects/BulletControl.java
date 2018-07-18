@@ -11,21 +11,29 @@ public class BulletControl {
     Bullet TempBullet;
     tankGame game;
 
+private int angle;
 
     public BulletControl(tankGame game)
     {
         this.game = game;
+
 //        addBullet (  new Bullet ( 100,300,game ) );
     }
 
     public void update(){
+
         for (int i= 0;i<b.size ();i++)
         {
             TempBullet = b.get ( i );
-            if(TempBullet.getX ()<0)
+
+            if(TempBullet.getX () <=0 || TempBullet.getY ()<=0 ) //remove bullets when it get to the edges of the window
                 removeBullet ( TempBullet );
-            TempBullet.update ();
+                TempBullet.update ();
+
+
         }
+
+
     }
 
     public void render(Graphics g){

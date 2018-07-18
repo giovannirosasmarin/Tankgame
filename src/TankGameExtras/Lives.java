@@ -1,40 +1,29 @@
-package Objects;
+package TankGameExtras;
 
 import Animacion.SpriteSheet;
 import window.tankGame;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-
-
-
-  import Animacion.SpriteSheet;
-import window.tankGame;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-
-public class Wall {
+public class Lives {
 
         private double x;
         private double y;
         private int vx = 0;
         private int vy = 0;
-        private final int r = 2;
-        private short angle;
+
 
 
         private BufferedImage bullet;
+        private float width =100 , height =32;
 
-        public Wall(double x, double y, short angle, tankGame game)
+        public Lives(double x, double y, tankGame game)
         {
 
             this.x = x;
             this.y = y;
 
-            this.angle =angle;
+
 
 //        this.angle=angle;
 //        this.vx = vx;
@@ -49,19 +38,17 @@ public class Wall {
 
 
 
-
-
-
-
-
         }
         public void render (Graphics g)
         {
 
-            AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
-            rotation.rotate(Math.toRadians(angle), bullet.getWidth() / 2, bullet.getHeight() / 2);
+
             Graphics2D graphic2D = (Graphics2D) g;
-            graphic2D.drawImage( bullet, rotation, null);
+            g.setColor ( Color.BLUE );
+
+            g.fillOval ( (int)x,(int)y,(int)width, (int)height );
+
+
         }
 
 
@@ -97,4 +84,5 @@ public class Wall {
 //    }
 
     }
+
 

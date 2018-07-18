@@ -15,8 +15,8 @@ import java.awt.image.BufferedImage;
 //Modified to fit with my keyInput and main tankGame class
 public class Enemy  {
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private final int r = 3;
     private int vx;
     private int vy;
@@ -27,7 +27,7 @@ public class Enemy  {
     private boolean RightPressed;
     private boolean LeftPressed;
 
-    public Enemy(int x, int y, int vx, int vy, short angle, tankGame game)
+    public Enemy(double x, double y, int vx, int vy, short angle, tankGame game)
     {
         this.x = x;
         this.y = y;
@@ -48,6 +48,7 @@ public class Enemy  {
             vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
             x+= vx;
             y+= vy;
+            getAngle ();
         }
 
         if (this.DownPressed)
@@ -56,27 +57,30 @@ public class Enemy  {
             vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
             x -= vx;
             y -= vy;
+            getAngle ();
         }
 
         if (this.LeftPressed)
         {
             this.angle -= 3;
+            getAngle ();
         }
         if (this.RightPressed)
         {
             this.angle += 3;
+            getAngle ();
         }
 
 
 //border collision of player with the window
         if(x<=0)
             x=0;
-        if(x>=640-20)
-            x=640-20;
+        if(x>=1280-20)
+            x=12800-20;
         if (y<=0)
             y=0;
-        if(y>=480-20)
-            y=480-20;
+        if(y>=960-20)
+            y=960-20;
     }
 
 
@@ -105,12 +109,12 @@ public class Enemy  {
     }
 
 
-    public void setX(int x)
+    public void setX(double x)
     {
         this.x = x;
     }
 
-    public void setY(int y)
+    public void setY(double y)
     {
         this.y = y;
     }
@@ -171,4 +175,8 @@ public class Enemy  {
         this.LeftPressed = false;
     }
 
+    public short getAngle() {
+
+        return angle;
+    }
 }

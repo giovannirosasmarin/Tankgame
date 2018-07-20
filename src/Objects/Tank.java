@@ -2,8 +2,8 @@ package Objects;
 
 import Animacion.SpriteSheet;
 import window.tankGame;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -81,6 +81,8 @@ public class Tank  {
         if(y>=960-20)
             y=960-20;
     }
+
+
 
     public void render (Graphics g)
     {
@@ -174,4 +176,22 @@ public class Tank  {
         this.LeftPressed = false;
     }
 
+//    public Rectangle getBounds()
+//    {
+//        return new Rectangle ( (int)((int)x +(Tank1.getWidth () /2)-((Tank1.getWidth () /2)/2)),(int)((int)y+(Tank1.getHeight () /2)),(int)Tank1.getWidth ()/2, (int)Tank1.getHeight () /2);
+//    }
+//    public Rectangle getBoundsTop()
+//    {
+//        return new Rectangle ( (int)((int)x +(Tank1.getWidth ()/2)-((Tank1.getWidth ()/2)/2)),(int)y,(int)Tank1.getWidth ()/2, (int)Tank1.getHeight ()/2);
+//    }
+//
+//    public Rectangle getBoundsRight()
+//    {
+//        return new Rectangle ((int) ((int)x+Tank1.getWidth ()-5),(int)y+5,(int)5, (int)Tank1.getHeight ()-10);
+//    }
+//
+//    public Rectangle getBoundsLeft()
+//    { return new Rectangle ( (int)x,(int)y+5,(int)5, (int)Tank1.getHeight ()-10);
+//
+//    }
 }

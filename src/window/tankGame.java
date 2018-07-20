@@ -14,7 +14,7 @@ public class tankGame extends Canvas implements Runnable {
     private boolean running = false;
     private Thread thread;
 
-    private BufferedImage image = new BufferedImage ( WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB ); //buffer all the window
+    //private BufferedImage image = new BufferedImage ( WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB ); //buffer all the window
     private BufferedImage spriteSheet = null; //tank.png spritesheet
     private BufferedImage background = null;// background of the window
 
@@ -29,11 +29,12 @@ public class tankGame extends Canvas implements Runnable {
     private Tank p;
     private BulletControl bc;
     private Enemy p2;
-    private Wall w1;
-    private static int W, H;
+
+    public static int W;
+   protected static int H;
     private static int sw, sh;
 
-
+    WallConstructor WC;
 //---------------------------------------------------------------------------------------
 
     private void init()
@@ -50,14 +51,15 @@ public class tankGame extends Canvas implements Runnable {
             e.printStackTrace ();
         }
 
-
+        WC = new WallConstructor ();
+        WC.createWalls ();
 
         p = new Tank (1180, 860, 0, 0, (short)-90,this);// Tank
         p2 = new Enemy(100, 100, 0, 0, (short)90,this);  //enemy
         hp = new Health ( 100,36,this );
         hp2 = new Health ( 1050,36,this );
         bc = new BulletControl (this);   //bullet
-        w1 = new Wall ( 32,100,(short)0,this ); //walls
+
 
         addKeyListener ( new keyInput (this) ); //adding key Listener for the key input
 
@@ -134,6 +136,7 @@ public class tankGame extends Canvas implements Runnable {
     }
 
     //---------------------------------------------------------------------------------------
+
     private void render()//everything in the game that renders
     {
 
@@ -169,7 +172,7 @@ public class tankGame extends Canvas implements Runnable {
 //bullet
         bc.render ( g );
 //walls
-        w1.render ( g );
+        WC.render ( g );
 
         hp.render ( g );
 
@@ -195,7 +198,7 @@ public class tankGame extends Canvas implements Runnable {
 //bullet
         bc.update ();
 //walls
-        w1.update ( );
+        WC.update();
 
         hp.update ( );
 
@@ -237,6 +240,9 @@ public class tankGame extends Canvas implements Runnable {
             p.toggleUpPressed();
         } else if(key == KeyEvent.VK_SHIFT){
             bc.addBullet ( new Bullet (p.getX (),p.getY(),p.getAngle (),this) );
+        }
+        if (key == KeyEvent.VK_ESCAPE) {   //press esc to exit game
+            System.exit ( 1 );
         }
     }
 

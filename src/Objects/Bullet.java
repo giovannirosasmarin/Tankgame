@@ -64,8 +64,16 @@ public class Bullet extends TankGameObjects{
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBoundsTop ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tankGame.Health -=10;
+
+                    if(tankGame.Health ==0){
+                        tempObject.setX( 1180);
+                        tempObject.setY (860);
+                        tankGame.Health =100*2;
+                    }
+
+
                     r=0;
                     y=1200;
                     x=0;
@@ -76,8 +84,14 @@ public class Bullet extends TankGameObjects{
 
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tankGame.Health -=10;
+
+                    if(tankGame.Health ==0){
+                        tempObject.setX( 1180);
+                        tempObject.setY (860);
+                        tankGame.Health =100*2;
+                    }
                     r=0;
                     y=1200;
                     x=0;
@@ -88,8 +102,14 @@ public class Bullet extends TankGameObjects{
                 //right
                 if(getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsRight ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tankGame.Health -=10;
+
+                    if(tankGame.Health ==0){
+                        tempObject.setX( 1180);
+                        tempObject.setY (860);
+                        tankGame.Health =100*2;
+                    }
                     r=0;
                     y=1200;
                     x=0;
@@ -99,8 +119,14 @@ public class Bullet extends TankGameObjects{
                 //left
                 if(getBoundsLeft ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tankGame.Health -=10;
+                    if(tankGame.Health ==0){
+                        tempObject.setX( 1180);
+                        tempObject.setY (860);
+                        tankGame.Health =100*2;
+                    }
+
                     r=0;
                     y=1200;
                     x=0;
@@ -133,20 +159,20 @@ public class Bullet extends TankGameObjects{
     }
 //@Override
 //public Rectangle getBounds() {
-//    return new Rectangle ( (int)(x)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/2,bullet.getHeight ()/2 );
+//    return new Rectangle ( (int)x+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/2,bullet.getHeight ()/2 );
 //}
 //    @Override
 //    public Rectangle getBoundsTop() {
-//        return new Rectangle ( (int)(x)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+bullet.getHeight ()/2 ,bullet.getWidth ()/2,bullet.getHeight ()/2 );
+//        return new Rectangle ( (int)x+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y,bullet.getWidth ()/2,bullet.getHeight ()/2 );
 //    }
 //    @Override
 //    public Rectangle getBoundsRight() {
-//        return new Rectangle ( (int)x,(int)y,5,bullet.getHeight ()-10 );
+//        return new Rectangle ( (int)x+bullet.getWidth ()-5,(int)y+3,5,bullet.getHeight ()-5 );
 //    }
 //
 //    @Override
 //    public Rectangle getBoundsLeft() {
-//        return new Rectangle ( (int)x,(int)y,5,bullet.getHeight ()-10 );
+//        return new Rectangle ( (int)x,(int)y+3,5,bullet.getHeight ()-5 );
 //    }
 
 
@@ -163,11 +189,11 @@ public class Bullet extends TankGameObjects{
             g2d.drawImage( bullet, rotation, null);
 
             //this gives the bounds of the player
-//            g.setColor (Color.red );
-//            g2d.draw (getBounds()  );
-//            g2d.draw ( getBoundsTop() );
-//            g2d.draw (  getBoundsRight());
-//            g2d.draw ( getBoundsLeft() );
+            g.setColor (Color.red );
+            g2d.draw (getBounds()  );
+            g2d.draw ( getBoundsTop() );
+            g2d.draw (  getBoundsRight());
+            g2d.draw ( getBoundsLeft() );
 
        }
 

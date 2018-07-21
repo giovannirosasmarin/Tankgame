@@ -18,7 +18,8 @@ public class tankGame extends Canvas implements Runnable {
     private BufferedImage background = null;// background of the window
 
     public static int WIDTH, HEIGHT;
-
+    public static  int Health = 100*2;
+    public static  int HealthEnemy = 100*2;
 
     TankGameObjectHandler objectHandler;
 //---------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ public class tankGame extends Canvas implements Runnable {
         objectHandler = new TankGameObjectHandler ();
 
         objectHandler.addObject ( new Tank ( 1180, 860, 0, 0, (short)-90, objectHandler,ObjectId.Tank,this ) );
-        objectHandler.addObject ( new Enemy ( 100, 100, 0, 0, (short)90,objectHandler,ObjectId.Enemy,this ) );
+        objectHandler.addObject ( new Enemy ( 150, 150, 0, 0, (short)90,objectHandler,ObjectId.Enemy,this ) );
 //        objectHandler.addBullet ( new Bullet ( (int)200,(int)200,(short)90, objectHandler,ObjectId.Bullet,this ) );
         objectHandler.createLevel ();
 
@@ -134,6 +135,26 @@ public class tankGame extends Canvas implements Runnable {
         g.drawImage ( background,0,0,getWidth (),getHeight (),null); // background of the window
 
         objectHandler.render ( g );
+
+        g.setColor ( Color.gray );
+        g.fillRect ( 40,36 ,200,25);
+
+        g.setColor ( Color.green );
+        g.fillRect ( 40,36 ,Health,25);
+
+        g.setColor ( Color.white );
+        g.drawRect ( 40,36 ,200,25);
+
+
+
+        g.setColor ( Color.gray );
+        g.fillRect ( 1000,36 ,200,25);
+
+        g.setColor ( Color.green );
+        g.fillRect ( 1000,36 ,HealthEnemy,25);
+
+        g.setColor ( Color.white );
+        g.drawRect ( 1000,36 ,200,25);
         ////////////////////////////////
         g.dispose ();
         bs.show ();

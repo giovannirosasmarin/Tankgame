@@ -147,12 +147,12 @@ public class Enemy extends TankGameObjects {
     @Override
 
     public Rectangle getBoundsRight() {
-        return new Rectangle ( (int)x+Enemy.getWidth ()-5,(int)y+5,5,Enemy.getHeight ()-10 );
+        return new Rectangle ( (int)x+Enemy.getWidth ()-5,(int)y+3,5,Enemy.getHeight ()-5 );
     }
 
     @Override
     public Rectangle getBoundsLeft() {
-        return new Rectangle ( (int)x,(int)y+5,5,Enemy.getHeight ()-10 );
+        return new Rectangle ( (int)x,(int)y+3,5,Enemy.getHeight ()-5 );
     }
 
 
@@ -165,11 +165,11 @@ public class Enemy extends TankGameObjects {
         g2d.drawImage( Enemy, rotation, null);
         //this gives the bounds of the player
 
-//        g.setColor ( Color.RED );
-//        g2d.draw (getBounds()  );
-//        g2d.draw ( getBoundsTop() );
-//        g2d.draw (  getBoundsRight());
-//        g2d.draw ( getBoundsLeft() );
+        g.setColor ( Color.RED );
+        g2d.draw (getBounds()  );
+        g2d.draw ( getBoundsTop() );
+        g2d.draw (  getBoundsRight());
+        g2d.draw ( getBoundsLeft() );
 
     }
 }

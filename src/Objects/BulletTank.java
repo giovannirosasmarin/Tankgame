@@ -56,18 +56,25 @@ public class BulletTank extends TankGameObjects{
 
 
             }
-            if(tempObject .getId ()== ObjectId.Enemy){
+            if(tempObject .getId ()== ObjectId.Enemy)
+            {
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBoundsTop ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
 
-                    tempObject.setY(100);
-                    tempObject.setX(100);
+                    tankGame.HealthEnemy -=10;
+
+                    if(tankGame.HealthEnemy ==0){
+                        tempObject.setX( 150);
+                        tempObject.setY (150);
+                        tankGame.HealthEnemy =100*2;
+                    }
 
 
                     r=0;
                     y=1200;
                     x=0;
+
 
 
                 }
@@ -75,12 +82,16 @@ public class BulletTank extends TankGameObjects{
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
 
-                    tempObject.setY(100);
-                    tempObject.setX(100);
+                    tankGame.HealthEnemy  -=10;
+
+                    if(tankGame.HealthEnemy  ==0){
+                        tempObject.setX( 150);
+                        tempObject.setY (150);
+                        tankGame.HealthEnemy =100*2;
+                    }
                     r=0;
                     y=1200;
                     x=0;
-
 
                 }
 
@@ -88,8 +99,15 @@ public class BulletTank extends TankGameObjects{
                 //right
                 if(getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsRight ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setY(100);
-                    tempObject.setX(100);
+
+
+                    tankGame.HealthEnemy -=10;
+
+                    if(tankGame.HealthEnemy ==0){
+                        tempObject.setX( 150);
+                        tempObject.setY (150);
+                        tankGame.HealthEnemy =100*2;
+                    }
                     r=0;
                     y=1200;
                     x=0;
@@ -99,8 +117,14 @@ public class BulletTank extends TankGameObjects{
                 //left
                 if(getBoundsLeft ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setY(100);
-                    tempObject.setX(100);
+
+                    tankGame.HealthEnemy -=10;
+                    if(tankGame.HealthEnemy ==0){
+                        tempObject.setX( 150);
+                        tempObject.setY (150);
+                        tankGame.HealthEnemy =100*2;
+                    }
+
                     r=0;
                     y=1200;
                     x=0;

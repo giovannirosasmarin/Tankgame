@@ -59,6 +59,9 @@ public class Tank extends TankGameObjects {
         if(y>=960-20)
             y=960-20;
 
+
+
+
         Collision ( object );
 
     }
@@ -140,13 +143,13 @@ public class Tank extends TankGameObjects {
     @Override
 
     public Rectangle getBoundsRight() {
-        return new Rectangle ( (int)x+Tank2.getWidth ()-5,(int)y+5,5,Tank2.getHeight ()-10 );
+        return new Rectangle ( (int)x+Tank2.getWidth ()-5,(int)y+3,5,Tank2.getHeight ()-5 );
     }
 
 
     @Override
     public Rectangle getBoundsLeft() {
-        return new Rectangle ( (int)x,(int)y+5,5,Tank2.getHeight ()-10 );
+        return new Rectangle ( (int)x,(int)y+3,5,Tank2.getHeight ()-5 );
     }
 
 
@@ -162,11 +165,11 @@ public class Tank extends TankGameObjects {
         g2d.drawImage( Tank2, rotation, null);
         //this gives the bounds of the player
 
-//        g.setColor ( Color.RED );
-//        g2d.draw (getBounds()  );
-//        g2d.draw ( getBoundsTop() );
-//        g2d.draw (  getBoundsRight());
-//        g2d.draw ( getBoundsLeft() );
+        g.setColor ( Color.RED );
+        g2d.draw (getBounds()  );
+        g2d.draw ( getBoundsTop() );
+        g2d.draw (  getBoundsRight());
+        g2d.draw ( getBoundsLeft() );
 
 
     }

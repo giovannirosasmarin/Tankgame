@@ -3,19 +3,20 @@ package Objects;
 import Animacion.SpriteSheet;
 import window.TankGameObjectHandler;
 import window.tankGame;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-public class Bullet extends TankGameObjects{
+public class BulletTank extends TankGameObjects{
 
     private int r = 5;
     private BufferedImage bullet;
     public TankGameObjectHandler objectHandler;
     tankGame game;
 
-    public Bullet(int x, int y,short angle, TankGameObjectHandler handler, ObjectId id, tankGame game) {
+    public BulletTank(int x, int y, short angle, TankGameObjectHandler handler, ObjectId id, tankGame game) {
         super ( x, y,0,0, angle, id );
         this.objectHandler = handler;
         this.game = game;
@@ -31,22 +32,18 @@ public class Bullet extends TankGameObjects{
         x+= vx;
         y+= vy;
 
-
         Collision ( object );
     }
     @Override
     protected void Collision(LinkedList<TankGameObjects> object)
     {
-        for (int i=0;i<objectHandler.object.size ();i++)
-        {
+        for (int i=0;i<objectHandler.object.size ();i++){
             TankGameObjects tempObject = objectHandler.object.get ( i );
 
-            if(tempObject .getId ()== ObjectId.Wall)
-            {
+            if(tempObject .getId ()== ObjectId.Wall){
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBounds () )||
-                        getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () ))
-                {
+                        getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () )){
 
 
                     r=0;
@@ -59,28 +56,31 @@ public class Bullet extends TankGameObjects{
 
 
             }
-            if(tempObject .getId ()== ObjectId.Tank)
-            {
+            if(tempObject .getId ()== ObjectId.Enemy){
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBoundsTop ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tempObject.setY(100);
+                    tempObject.setX(100);
+
+
                     r=0;
                     y=1200;
                     x=0;
-
 
 
                 }
 
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+
+                    tempObject.setY(100);
+                    tempObject.setX(100);
                     r=0;
                     y=1200;
                     x=0;
+
 
                 }
 
@@ -88,8 +88,8 @@ public class Bullet extends TankGameObjects{
                 //right
                 if(getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsRight ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+                    tempObject.setY(100);
+                    tempObject.setX(100);
                     r=0;
                     y=1200;
                     x=0;
@@ -99,8 +99,8 @@ public class Bullet extends TankGameObjects{
                 //left
                 if(getBoundsLeft ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
-                    tempObject.setX( 1180);
-                    tempObject.setY (860);
+                    tempObject.setY(100);
+                    tempObject.setX(100);
                     r=0;
                     y=1200;
                     x=0;
@@ -110,7 +110,22 @@ public class Bullet extends TankGameObjects{
 
             }
         }
-
+//            if(tempObject .getId ()== ObjectId.Enemy){
+//
+//                if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBounds () )||
+//                        getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () )){
+//
+//
+//                    r=0;
+//                    y=1200;
+//                    x=0;
+//
+//
+//                }
+//
+//
+//
+//            }
 
         }
 

@@ -2,7 +2,7 @@ package window;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 
 public class Window
 {
@@ -20,12 +20,8 @@ public class Window
         frame.setLocationRelativeTo ( null );  // opens in the center of the screen
         frame.setVisible ( true );  // it visible when started
 
-
-
         game.start ();
 
     }
 
-
 }
-

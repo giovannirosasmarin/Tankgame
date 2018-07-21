@@ -1,46 +1,28 @@
 package Objects;
 
 import Animacion.SpriteSheet;
+import window.TankGameObjectHandler;
 import window.tankGame;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
-/**
- *
- * @author anthony-pc
- */
+public class Tank extends TankGameObjects {
+    private BufferedImage Tank2;
 
-//Modified to fit with my keyInput and main tankGame class
-public class Tank  {
+    public TankGameObjectHandler objectHandler;
 
-    private double x;
-    private double y;
-    private final int r = 3;
-    private int vx;
-    private int vy;
-    private short angle;
-    private BufferedImage Tank1;
-    private boolean UpPressed;
-    private boolean DownPressed;
-    private boolean RightPressed;
-    private boolean LeftPressed;
 
-    public Tank(double x, double y, int vx, int vy, short angle, tankGame game)
-    {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.angle = angle;
-
+    public Tank(int x, int y, int vx, int vy, short angle, TankGameObjectHandler handler, Objects.ObjectId id , tankGame game) {
+        super ( x, y, vx, vy, angle, id );
+        this.objectHandler = handler;
         SpriteSheet ss =new SpriteSheet ( game.getSpriteSheet ());
-        Tank1 = ss.grabImage ( 1,1,32,32 );
-
+        Tank2 = ss.grabImage ( 1,1,32,32 );
     }
-    public void update()
-    {
+
+    @Override
+    public void update(LinkedList<TankGameObjects> object) {
         // x++;   //test to make it move just to the right
         if (this.UpPressed)
         {
@@ -48,7 +30,6 @@ public class Tank  {
             vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
             x+= vx;
             y+= vy;
-            getAngle ();
         }
 
         if (this.DownPressed)
@@ -57,18 +38,15 @@ public class Tank  {
             vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
             x -= vx;
             y -= vy;
-            getAngle ();
         }
 
         if (this.LeftPressed)
         {
             this.angle -= 3;
-            getAngle ();
         }
         if (this.RightPressed)
         {
             this.angle += 3;
-            getAngle ();
         }
 
 //border collision of player with the window
@@ -80,118 +58,117 @@ public class Tank  {
             y=0;
         if(y>=960-20)
             y=960-20;
+
+        Collision ( object );
+
+    }
+    @Override
+    protected void Collision(LinkedList<TankGameObjects> object)
+    {
+        for (int i=0;i<objectHandler.object.size ();i++){
+            TankGameObjects tempObject = objectHandler.object.get ( i );
+
+            if(tempObject .getId ()== ObjectId.Wall){
+
+                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY () + 32);
+                    vy =0;
+
+                }
+
+                if(getBounds ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY ()- Tank2.getHeight ());
+                    vy =0;
+
+                }
+
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) - Tank2.getHeight ());
+
+                }
+                //left
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) + 35);
+
+                }
+
+            }
+            if(tempObject .getId ()== ObjectId.Enemy){
+
+                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY () + 32);
+                    vy =0;
+                    vx=0;
+
+                }
+
+                if(getBounds ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY ()- Tank2.getHeight ());
+                    vy =0;
+                    vx=0;
+
+                }
+
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) - Tank2.getHeight ());
+
+                    vy =0;
+                    vx=0;
+                }
+                //left
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) + 35);
+                    vy =0;
+                    vx=0;
+                }
+
+            }
+
+        }
+    }
+
+    @Override
+    public Rectangle getBounds() {
+       return new Rectangle ( (int)x+(Tank2.getWidth ()/2)-((Tank2.getWidth ()/2)/2),(int)y+(Tank2.getHeight ()/2),Tank2.getWidth ()/2,Tank2.getHeight ()/2 );
+    }
+    @Override
+    public Rectangle getBoundsTop() {
+        return new Rectangle ( (int)x+(Tank2.getWidth ()/2)-((Tank2.getWidth ()/2)/2),(int)y,Tank2.getWidth ()/2,Tank2.getHeight ()/2 );
+    }
+    @Override
+
+    public Rectangle getBoundsRight() {
+        return new Rectangle ( (int)x+Tank2.getWidth ()-5,(int)y+5,5,Tank2.getHeight ()-10 );
+    }
+
+
+    @Override
+    public Rectangle getBoundsLeft() {
+        return new Rectangle ( (int)x,(int)y+5,5,Tank2.getHeight ()-10 );
     }
 
 
 
-    public void render (Graphics g)
-    {
+
+    @Override
+    public void render(Graphics g) {
+
 
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
-        rotation.rotate(Math.toRadians(angle), Tank1.getWidth() / 2, Tank1.getHeight() / 2);
-        Graphics2D graphic2D = (Graphics2D) g;
-        graphic2D.drawImage( Tank1, rotation, null);
+        rotation.rotate(Math.toRadians(angle), Tank2.getWidth() / 2, Tank2.getHeight() / 2);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage( Tank2, rotation, null);
+        //this gives the bounds of the player
+
+//        g.setColor ( Color.RED );
+//        g2d.draw (getBounds()  );
+//        g2d.draw ( getBoundsTop() );
+//        g2d.draw (  getBoundsRight());
+//        g2d.draw ( getBoundsLeft() );
 
 
     }
 
-    public double  getX()
-    {
-        return x;
-    }
-
-
-    public  double getY()
-    {
-        return y;
-    }
-
-
-    public void setX(double x)
-    {
-        this.x = x;
-    }
-
-    public void setY(double y)
-    {
-        this.y = y;
-    }
-
-    public void setVx(int vx)
-    {
-        this.vx = vx;
-    }
-
-    public void setVy(int vy)
-    {
-        this.vy = vy;
-    }
-
-    public short getAngle(){
-        return angle;
-    }
-    public void setAngle(short angle)
-    {
-        this.angle = angle;
-    }
-
-
-    public void toggleUpPressed()
-    {
-        this.UpPressed = true;
-    }
-
-    public void toggleDownPressed()
-    {
-        this.DownPressed = true;
-    }
-
-    public void toggleRightPressed()
-    {
-        this.RightPressed = true;
-    }
-
-    public void toggleLeftPressed()
-    {
-        this.LeftPressed = true;
-    }
-
-    public void unToggleUpPressed()
-    {
-        this.UpPressed = false;
-    }
-
-    public void unToggleDownPressed()
-    {
-        this.DownPressed = false;
-    }
-
-    public void unToggleRightPressed()
-    {
-        this.RightPressed = false;
-    }
-
-    public void unToggleLeftPressed()
-    {
-        this.LeftPressed = false;
-    }
-
-//    public Rectangle getBounds()
-//    {
-//        return new Rectangle ( (int)((int)x +(Tank1.getWidth () /2)-((Tank1.getWidth () /2)/2)),(int)((int)y+(Tank1.getHeight () /2)),(int)Tank1.getWidth ()/2, (int)Tank1.getHeight () /2);
-//    }
-//    public Rectangle getBoundsTop()
-//    {
-//        return new Rectangle ( (int)((int)x +(Tank1.getWidth ()/2)-((Tank1.getWidth ()/2)/2)),(int)y,(int)Tank1.getWidth ()/2, (int)Tank1.getHeight ()/2);
-//    }
-//
-//    public Rectangle getBoundsRight()
-//    {
-//        return new Rectangle ((int) ((int)x+Tank1.getWidth ()-5),(int)y+5,(int)5, (int)Tank1.getHeight ()-10);
-//    }
-//
-//    public Rectangle getBoundsLeft()
-//    { return new Rectangle ( (int)x,(int)y+5,(int)5, (int)Tank1.getHeight ()-10);
-//
-//    }
 }

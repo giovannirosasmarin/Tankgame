@@ -15,6 +15,9 @@ public class TankGameObjectHandler// it gets the objects in the game
         private LinkedList<BulletTank> bt = new LinkedList<BulletTank> (  );
         BulletTank TempBulletTank;
 
+//        private LinkedList<Health> h = new LinkedList<Health> (  );
+//        Health Temphealth;
+
         private TankGameObjects tempObject;
 
         public void update()
@@ -33,6 +36,7 @@ public class TankGameObjectHandler// it gets the objects in the game
                     removeBullet ( TempBullet );
                 TempBullet.update (object);
             }
+
             for (int i= 0;i<bt.size ();i++){
                 TempBulletTank = bt.get ( i );
 
@@ -40,6 +44,17 @@ public class TankGameObjectHandler// it gets the objects in the game
                     removeBulletTank ( TempBulletTank );
                 TempBulletTank.update (object);
             }
+
+
+//            for(int i =0; i<h.size();i++){
+//                Temphealth = h.get ( i );
+//
+//                if(Temphealth.getX () ==1 )
+//                    removeHealth ( Temphealth );
+//                Temphealth.update (object);
+//
+//        }
+
         }
 
         public void render(Graphics g)
@@ -56,6 +71,12 @@ public class TankGameObjectHandler// it gets the objects in the game
 
                 TempBullet.render (g);
             }
+
+//            for (int i= 0;i<h.size ();i++){
+//                Temphealth = h.get ( i );
+//
+//                Temphealth.render (g);
+//            }
             for (int i= 0;i<bt.size ();i++){
                 TempBulletTank = bt.get ( i );
 
@@ -92,6 +113,14 @@ public class TankGameObjectHandler// it gets the objects in the game
 //            this.b.removeLast ();
         }
 
+//        public void addHealth(Health h){
+//            this.h.add(h);
+//        }
+//        public void removeHealth(Health h){
+//            this.h.remove (h);
+////            this.b.removeFirst ();
+////            this.b.removeLast ();
+//        }
         public void createLevel()
         {
             for(int xx = 0; xx < tankGame.WIDTH; xx += 32)//Top

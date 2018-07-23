@@ -103,37 +103,37 @@ public class Enemy extends TankGameObjects {
 
             }
 
-            if(tempObject .getId ()== ObjectId.Tank){
-
-                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
-                    y = (int) (tempObject.getY () + 32);
-                    vy =0;
-                    vx=0;
-
-                }
-
-                if(getBounds ().intersects ( tempObject.getBounds () )){
-                    y = (int) (tempObject.getY ()- Enemy.getHeight ());
-
-                    vy =0;
-                    vx=0;
-
-                }
-
-                //right
-                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
-                    x = (int) (tempObject.getX ( ) - Enemy.getHeight ());
-                    vy =0;
-                    vx=0;
-                }
-                //left
-                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
-                    x = (int) (tempObject.getX ( ) + 35);
-                    vy =0;
-                    vx=0;
-                }
-
-            }
+//            if(tempObject .getId ()== ObjectId.Tank){
+//
+//                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+//                    y = (int) (tempObject.getY () + 32);
+//                    vy =0;
+//                    vx=0;
+//
+//                }
+//
+//                if(getBounds ().intersects ( tempObject.getBounds () )){
+//                    y = (int) (tempObject.getY ()- Enemy.getHeight ());
+//
+//                    vy =0;
+//                    vx=0;
+//
+//                }
+//
+//                //right
+//                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+//                    x = (int) (tempObject.getX ( ) - Enemy.getHeight ());
+//                    vy =0;
+//                    vx=0;
+//                }
+//                //left
+//                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+//                    x = (int) (tempObject.getX ( ) + 35);
+//                    vy =0;
+//                    vx=0;
+//                }
+//
+//            }
         }
     }
     @Override
@@ -165,11 +165,7 @@ public class Enemy extends TankGameObjects {
         g2d.drawImage( Enemy, rotation, null);
         //this gives the bounds of the player
 
-        g.setColor ( Color.RED );
-        g2d.draw (getBounds()  );
-        g2d.draw ( getBoundsTop() );
-        g2d.draw (  getBoundsRight());
-        g2d.draw ( getBoundsLeft() );
+//   a
 
     }
 }

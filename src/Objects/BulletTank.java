@@ -61,19 +61,19 @@ public class BulletTank extends TankGameObjects{
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBoundsTop ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
-
+                    r=0;
+                    y=1200;
+                    x=0;
                     tankGame.HealthEnemy -=10;
 
                     if(tankGame.HealthEnemy ==0){
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
+
+                        System.out.println ( "Destroyed" );
                     }
 
-
-                    r=0;
-                    y=1200;
-                    x=0;
 
 
 
@@ -88,6 +88,8 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
+
+                        System.out.println ( "Destroyed" );
                     }
                     r=0;
                     y=1200;
@@ -107,6 +109,8 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
+
+                        System.out.println ( "Destroyed" );
                     }
                     r=0;
                     y=1200;
@@ -123,6 +127,8 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
+
+                        System.out.println ( "Destroyed" );
                     }
 
                     r=0;

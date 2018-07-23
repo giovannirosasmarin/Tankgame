@@ -17,6 +17,7 @@ public class Tank extends TankGameObjects {
     public Tank(int x, int y, int vx, int vy, short angle, TankGameObjectHandler handler, Objects.ObjectId id , tankGame game) {
         super ( x, y, vx, vy, angle, id );
         this.objectHandler = handler;
+
         SpriteSheet ss =new SpriteSheet ( game.getSpriteSheet ());
         Tank2 = ss.grabImage ( 1,1,32,32 );
     }
@@ -165,11 +166,11 @@ public class Tank extends TankGameObjects {
         g2d.drawImage( Tank2, rotation, null);
         //this gives the bounds of the player
 
-        g.setColor ( Color.RED );
-        g2d.draw (getBounds()  );
-        g2d.draw ( getBoundsTop() );
-        g2d.draw (  getBoundsRight());
-        g2d.draw ( getBoundsLeft() );
+//        g.setColor ( Color.RED );
+//        g2d.draw (getBounds()  );
+//        g2d.draw ( getBoundsTop() );
+//        g2d.draw (  getBoundsRight());
+//        g2d.draw ( getBoundsLeft() );
 
 
     }

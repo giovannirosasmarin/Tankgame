@@ -14,6 +14,8 @@ public class Bullet extends TankGameObjects{
     private BufferedImage bullet;
     public TankGameObjectHandler objectHandler;
     tankGame game;
+    private int lives;
+
 
     public Bullet(int x, int y,short angle, TankGameObjectHandler handler, ObjectId id, tankGame game) {
         super ( x, y,0,0, angle, id );
@@ -66,11 +68,12 @@ public class Bullet extends TankGameObjects{
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.Health -=10;
-
-                    if(tankGame.Health ==0){
-                        tempObject.setX( 1180);
-                        tempObject.setY (860);
-                        tankGame.Health =100*2;
+                    if (tankGame.Health == 0) {
+                        tempObject.setX ( 1180 );
+                        tempObject.setY ( 860 );
+                        tankGame.Health = 100 * 2;
+                        lives++;
+                        System.out.println ( "Destroyed" );
                     }
 
 
@@ -86,12 +89,16 @@ public class Bullet extends TankGameObjects{
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.Health -=10;
+                    if (tankGame.Health == 0) {
+                        tempObject.setX ( 1180 );
+                        tempObject.setY ( 860 );
+                        tankGame.Health = 100 * 2;
 
-                    if(tankGame.Health ==0){
-                        tempObject.setX( 1180);
-                        tempObject.setY (860);
-                        tankGame.Health =100*2;
-                    }
+                        System.out.println ( "Destroyed" );
+                        }
+
+
+
                     r=0;
                     y=1200;
                     x=0;
@@ -104,12 +111,14 @@ public class Bullet extends TankGameObjects{
                         getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.Health -=10;
+                    if (tankGame.Health == 0) {
+                        tempObject.setX ( 1180 );
+                        tempObject.setY ( 860 );
+                        tankGame.Health = 100 * 2;
 
-                    if(tankGame.Health ==0){
-                        tempObject.setX( 1180);
-                        tempObject.setY (860);
-                        tankGame.Health =100*2;
+                        System.out.println ( "Destroyed" );
                     }
+
                     r=0;
                     y=1200;
                     x=0;
@@ -119,26 +128,35 @@ public class Bullet extends TankGameObjects{
                 //left
                 if(getBoundsLeft ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
-
-                    tankGame.Health -=10;
-                    if(tankGame.Health ==0){
-                        tempObject.setX( 1180);
-                        tempObject.setY (860);
-                        tankGame.Health =100*2;
-                    }
-
+                    tankGame.Health -=50;
                     r=0;
                     y=1200;
                     x=0;
 
-                }
 
+
+                        while (tankGame.Health == 0) {
+
+                            tempObject.setX ( 150 );
+                            tempObject.setY ( 150 );
+                            tankGame.Health = 100 * 2;
+
+                            System.out.println ( "Destroyed" );
+
+
+
+
+                            }
+
+
+                        }
 
             }
-        }
 
 
         }
+   }
+
 
 @Override
     public Rectangle getBounds() {
@@ -189,11 +207,11 @@ public class Bullet extends TankGameObjects{
             g2d.drawImage( bullet, rotation, null);
 
             //this gives the bounds of the player
-            g.setColor (Color.red );
-            g2d.draw (getBounds()  );
-            g2d.draw ( getBoundsTop() );
-            g2d.draw (  getBoundsRight());
-            g2d.draw ( getBoundsLeft() );
+//            g.setColor (Color.red );
+//            g2d.draw (getBounds()  );
+//            g2d.draw ( getBoundsTop() );
+//            g2d.draw (  getBoundsRight());
+//            g2d.draw ( getBoundsLeft() );
 
        }
 

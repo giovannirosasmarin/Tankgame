@@ -15,7 +15,8 @@ public class keyInput extends KeyAdapter
 {
     tankGame game;
     TankGameObjectHandler objectHandler;
-
+    private boolean isShooting = false;
+    private boolean isShootingEnemy = false;
 
     public keyInput(TankGameObjectHandler handler,tankGame game){
         this.objectHandler = handler;
@@ -40,7 +41,8 @@ public class keyInput extends KeyAdapter
                     tempObject.toggleDownPressed ();
                 } else if(key == KeyEvent.VK_UP) {
                     tempObject.toggleUpPressed ();
-                }else if(key == KeyEvent.VK_NUMPAD0){
+                }else if(key == KeyEvent.VK_NUMPAD0 && !isShooting){
+                    isShooting = true;
                     objectHandler.addObject ( new BulletTank ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.BulletTank,game ) );
                 }
             }
@@ -55,7 +57,8 @@ public class keyInput extends KeyAdapter
                     tempObject.toggleDownPressed ();
                 } else if(key == KeyEvent.VK_W) {
                     tempObject.toggleUpPressed ();
-                }else if(key == KeyEvent.VK_SPACE){
+                }else if(key == KeyEvent.VK_SPACE&& !isShootingEnemy){
+                    isShootingEnemy = true;
                     objectHandler.addObject ( new Bullet ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.Bullet,game ) );
                 }
             }
@@ -88,6 +91,8 @@ public class keyInput extends KeyAdapter
                     tempObject.unToggleDownPressed ();
                 } else if(key == KeyEvent.VK_UP) {
                     tempObject.unToggleUpPressed ();
+                } else if(key == KeyEvent.VK_NUMPAD0) {
+                    isShooting = false;
                 }
 
             }
@@ -101,6 +106,8 @@ public class keyInput extends KeyAdapter
                     tempObject.unToggleDownPressed ();
                 } else if(key == KeyEvent.VK_W) {
                     tempObject.unToggleUpPressed ();
+                } else if(key == KeyEvent.VK_SPACE) {
+                    isShootingEnemy = false;
                 }
 
 

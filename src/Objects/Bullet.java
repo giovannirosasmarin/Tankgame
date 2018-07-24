@@ -57,6 +57,18 @@ public class Bullet extends TankGameObjects{
                     x=0;
                 }
             }
+//            if(tempObject .getId ()== ObjectId.BreakableWall)
+//            {
+//
+//                if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBounds () )||
+//                        getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () ))
+//                {
+//
+//                    r=0;
+//                    y=1200;
+//                    x=0;
+//                }
+//            }
             if(tempObject .getId ()== ObjectId.Tank)
             {
 
@@ -141,20 +153,19 @@ public class Bullet extends TankGameObjects{
 
 @Override
     public Rectangle getBounds() {
-        return new Rectangle ( (int)(x+4)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/4,bullet.getHeight ()/4 );
+        return new Rectangle ( (int)(x+6)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/5,bullet.getHeight ()/5 );
     }
     @Override
     public Rectangle getBoundsTop() {
-        return new Rectangle ( (int)(x+4)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+bullet.getHeight ()/4 ,bullet.getWidth ()/4,bullet.getHeight ()/4 );
+        return new Rectangle ( (int)(x+6)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+bullet.getHeight ()/3 ,bullet.getWidth ()/5,bullet.getHeight ()/5 );
     }
     @Override
     public Rectangle getBoundsRight() {
-        return new Rectangle ( (int)x+bullet.getWidth ()-9,(int)y+10,5,bullet.getHeight ()-20 );
+        return new Rectangle ( (int)x+bullet.getWidth ()-10,(int)y+11,2,bullet.getHeight ()-22 );
     }
-
     @Override
     public Rectangle getBoundsLeft() {
-        return new Rectangle ( (int)x+4,(int)y+10,5,bullet.getHeight ()-20 );
+        return new Rectangle ( (int)x+9,(int)y+11,2,bullet.getHeight ()-22 );
     }
 
     //big rectangles not good for the small bullet that I drew

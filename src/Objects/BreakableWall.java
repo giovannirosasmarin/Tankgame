@@ -39,6 +39,7 @@ public class BreakableWall extends TankGameObjects {
 
                 if (getBounds ( ).intersects ( tempObject.getBounds ( ) ) || getBounds ( ).intersects ( tempObject.getBoundsLeft ( ) ) ||
                         getBounds ( ).intersects ( tempObject.getBoundsRight ( ) ) || getBounds ( ).intersects ( tempObject.getBoundsTop ( ) )) {
+
                     x=1300;
 
                 }

@@ -66,6 +66,7 @@ public class tankGame extends JPanel implements Runnable {
         objectHandler.addObject ( new Tank ( 1180, 860, 0, 0, (short)-90, objectHandler,ObjectId.Tank,this ) );
 //        objectHandler.addObject ( new Tank ( 100, 100, 0, 0, (short)-90, objectHandler,ObjectId.Tank,this ) );  //test for collision between tanks
         objectHandler.addObject ( new Enemy ( 150, 150, 0, 0, (short)90,objectHandler,ObjectId.Enemy,this ) );
+//        objectHandler.addObject ( new Bullet ( 180,180,(short)0, objectHandler,ObjectId.Bullet,this));
 
 //HealthPowerUp
         objectHandler.addObject ( new PowerUp ( 400,400, objectHandler,ObjectId.PowerUp,this) );
@@ -144,7 +145,7 @@ public class tankGame extends JPanel implements Runnable {
         init();
 
         long lastTime = System.nanoTime ();
-        final double amountOfTicks = 50.0; // it will update 60 times
+        final double amountOfTicks = 80.0; // it will update 60 times
         double ns = 1000000000/ amountOfTicks;
         double delta = 0; //time that has passed  //going to catch up
         int updates = 0;
@@ -259,7 +260,7 @@ public class tankGame extends JPanel implements Runnable {
         g2.setColor(Color.WHITE);
         g2.drawOval ( 1080, 63,30,30 );
 
-        ////////////////////////////////
+
         Graphics2D g22 = (Graphics2D)g ;
         g22.drawImage ( world,0,0,null);
 //        BufferedImage lh = world.getSubimage ( 0,0,1280,960 );
@@ -269,6 +270,8 @@ public class tankGame extends JPanel implements Runnable {
 //        g22.drawImage ( rh,1280/2,0, null  );
         g22.scale ( .2,.2 );//minimap scalecx
         g22.drawImage ( mm, 2500,0, null ); //location of the minimap in the window
+
+        ////////////////////////////////
         g.dispose ();
         //bs.show ();
 

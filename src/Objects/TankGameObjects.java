@@ -18,11 +18,6 @@ public abstract class TankGameObjects {
     protected boolean RightPressed;
     protected boolean LeftPressed;
 
-    protected boolean upCollision;
-    protected boolean downCollision;
-    protected boolean leftColision;
-    protected boolean rightColision;
-
         public TankGameObjects(int x, int y, int vx, int vy, short angle,ObjectId id )
         {
             this.id = id;
@@ -96,7 +91,6 @@ public abstract class TankGameObjects {
         }
 
 
-
         public void toggleUpPressed()
         {
             this.UpPressed = true;
@@ -137,44 +131,7 @@ public abstract class TankGameObjects {
             this.LeftPressed = false;
         }
 
-        public void cUp()
-        {
-            this.upCollision = true;
-        }
 
-         public void cDown()
-        {
-            this.downCollision = true;
-        }
-
-         public void cRight()
-        {
-            this.rightColision = true;
-        }
-
-        public void cLeft()
-        {
-            this.leftColision= true;
-        }
-        public void ctUp()
-        {
-            this.upCollision = false;
-        }
-
-        public void ctDown()
-        {
-            this.downCollision= false;
-        }
-
-        public void ctLeft()
-        {
-            this.leftColision = false;
-        }
-
-        public void ctRight()
-        {
-            this.rightColision = false;
-        }
     }
 
 

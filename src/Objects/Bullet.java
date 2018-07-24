@@ -17,7 +17,8 @@ public class Bullet extends TankGameObjects{
     private int lives;
 
 
-    public Bullet(int x, int y,short angle, TankGameObjectHandler handler, ObjectId id, tankGame game) {
+    public Bullet(int x, int y,short angle, TankGameObjectHandler handler, ObjectId id, tankGame game)
+    {
         super ( x, y,0,0, angle, id );
         this.objectHandler = handler;
         this.game = game;
@@ -27,7 +28,8 @@ public class Bullet extends TankGameObjects{
 
 
     @Override
-    public void update(LinkedList<TankGameObjects> object) {
+    public void update(LinkedList<TankGameObjects> object)
+    {
         vx = (int) Math.round(r * Math.cos(Math.toRadians(angle)));
         vy = (int) Math.round(r * Math.sin(Math.toRadians(angle)));
         x+= vx;
@@ -50,16 +52,10 @@ public class Bullet extends TankGameObjects{
                         getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () ))
                 {
 
-
                     r=0;
                     y=1200;
                     x=0;
-
-
                 }
-
-
-
             }
             if(tempObject .getId ()== ObjectId.Tank)
             {
@@ -68,7 +64,11 @@ public class Bullet extends TankGameObjects{
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.Health -=10;
-                    if (tankGame.Health == 0) {
+                    r=0;
+                    y=1200;
+                    x=0;
+                    if (tankGame.Health == 0)
+                    {
                         tempObject.setX ( 1180 );
                         tempObject.setY ( 860 );
                         tankGame.Health = 100 * 2;
@@ -76,42 +76,17 @@ public class Bullet extends TankGameObjects{
                         System.out.println ( "Destroyed" );
                     }
 
-
-                    r=0;
-                    y=1200;
-                    x=0;
-
-
-
                 }
 
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.Health -=10;
-                    if (tankGame.Health == 0) {
-                        tempObject.setX ( 1180 );
-                        tempObject.setY ( 860 );
-                        tankGame.Health = 100 * 2;
-
-                        System.out.println ( "Destroyed" );
-                        }
-
-
-
                     r=0;
                     y=1200;
                     x=0;
-
-                }
-
-
-                //right
-                if(getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsRight ().intersects ( tempObject.getBoundsLeft () )||
-                        getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
-
-                    tankGame.Health -=10;
-                    if (tankGame.Health == 0) {
+                    if (tankGame.Health == 0)
+                    {
                         tempObject.setX ( 1180 );
                         tempObject.setY ( 860 );
                         tankGame.Health = 100 * 2;
@@ -119,42 +94,48 @@ public class Bullet extends TankGameObjects{
                         System.out.println ( "Destroyed" );
                     }
 
+
+                }
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsRight ().intersects ( tempObject.getBoundsLeft () )||
+                        getBoundsRight ().intersects ( tempObject.getBoundsRight () )||getBoundsRight ().intersects ( tempObject.getBoundsTop () )){
+
+                    tankGame.Health -=10;
                     r=0;
                     y=1200;
                     x=0;
+                    if (tankGame.Health == 0)
+                    {
+                        tempObject.setX ( 1180 );
+                        tempObject.setY ( 860 );
+                        tankGame.Health = 100 * 2;
 
+                        System.out.println ( "Destroyed" );
+                    }
                 }
 
                 //left
                 if(getBoundsLeft ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
-                    tankGame.Health -=50;
+
+                    tankGame.Health -=10;
                     r=0;
                     y=1200;
                     x=0;
 
+                     if(tankGame.Health == 0)
+                     {
 
-
-                        while (tankGame.Health == 0) {
-
-                            tempObject.setX ( 150 );
-                            tempObject.setY ( 150 );
+                            tempObject.setX ( 1180 );
+                            tempObject.setY ( 860 );
                             tankGame.Health = 100 * 2;
 
                             System.out.println ( "Destroyed" );
 
-
-
-
-                            }
-
-
-                        }
-
+                      }
+                }
             }
-
-
-        }
+       }
    }
 
 
@@ -175,6 +156,8 @@ public class Bullet extends TankGameObjects{
     public Rectangle getBoundsLeft() {
         return new Rectangle ( (int)x+4,(int)y+10,5,bullet.getHeight ()-20 );
     }
+
+    //big rectangles not good for the small bullet that I drew
 //@Override
 //public Rectangle getBounds() {
 //    return new Rectangle ( (int)x+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/2,bullet.getHeight ()/2 );
@@ -198,8 +181,6 @@ public class Bullet extends TankGameObjects{
     public void render (Graphics g)
         {
 
-//            g.setColor ( Color.yellow);
-//            g.fillRect ( (int)x,(int)y,2,6 );
             AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
             rotation.rotate(Math.toRadians(angle), bullet.getWidth() / 2, bullet.getHeight() / 2);
             Graphics2D g2d = (Graphics2D) g;

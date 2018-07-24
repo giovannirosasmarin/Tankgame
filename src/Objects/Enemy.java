@@ -103,37 +103,68 @@ public class Enemy extends TankGameObjects {
 
             }
 
-//            if(tempObject .getId ()== ObjectId.Tank){
-//
-//                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
-//                    y = (int) (tempObject.getY () + 32);
-//                    vy =0;
-//                    vx=0;
-//
-//                }
-//
-//                if(getBounds ().intersects ( tempObject.getBounds () )){
-//                    y = (int) (tempObject.getY ()- Enemy.getHeight ());
-//
-//                    vy =0;
-//                    vx=0;
-//
-//                }
-//
-//                //right
-//                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
-//                    x = (int) (tempObject.getX ( ) - Enemy.getHeight ());
-//                    vy =0;
-//                    vx=0;
-//                }
-//                //left
-//                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
-//                    x = (int) (tempObject.getX ( ) + 35);
-//                    vy =0;
-//                    vx=0;
-//                }
-//
-//            }
+            if(tempObject .getId ()== ObjectId.Tank){
+
+                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY () + 32);
+                    vy =0;
+                    vx=0;
+
+                }
+
+                if(getBounds ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY ()- Enemy.getHeight ());
+
+                    vy =0;
+                    vx=0;
+
+                }
+
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) - Enemy.getHeight ());
+                    vy =0;
+                    vx=0;
+                }
+                //left
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) + 35);
+                    vy =0;
+                    vx=0;
+                }
+
+            }
+            if(tempObject .getId ()== ObjectId.BreakableWall){
+
+                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY () + 32);
+                    vy =0;
+                    vx=0;
+
+                }
+
+                if(getBounds ().intersects ( tempObject.getBounds () )){
+                    y = (int) (tempObject.getY ()- Enemy.getHeight ());
+
+                    vy =0;
+                    vx=0;
+
+                }
+
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) - Enemy.getHeight ());
+                    vy =0;
+                    vx=0;
+                }
+                //left
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                    x = (int) (tempObject.getX ( ) + 35);
+                    vy =0;
+                    vx=0;
+                }
+
+            }
         }
     }
     @Override

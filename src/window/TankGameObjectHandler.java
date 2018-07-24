@@ -5,8 +5,9 @@ import Objects.*;
 import java.awt.*;
 import java.util.LinkedList;
 
-public class TankGameObjectHandler// it gets the objects in the game
+public class TankGameObjectHandler// it gets all the objects in the tank game
     {
+
         private tankGame game;
         public LinkedList<TankGameObjects> object = new LinkedList<TankGameObjects> (  );
         private LinkedList<Bullet> b = new LinkedList<Bullet> (  );
@@ -15,8 +16,13 @@ public class TankGameObjectHandler// it gets the objects in the game
         private LinkedList<BulletTank> bt = new LinkedList<BulletTank> (  );
         BulletTank TempBulletTank;
 
-//        private LinkedList<Health> h = new LinkedList<Health> (  );
-//        Health Temphealth;
+
+        private LinkedList<PowerUp> p= new LinkedList<> (  );
+        PowerUp powerUp;
+
+        private LinkedList<BreakableWall> bw= new LinkedList<> (  );
+        BreakableWall Tempwall;
+
 
         private TankGameObjects tempObject;
 
@@ -29,7 +35,8 @@ public class TankGameObjectHandler// it gets the objects in the game
                 tempObject.update ( object );
             }
 
-            for (int i= 0;i<b.size ();i++){
+            for (int i= 0;i<b.size ();i++)
+            {
                 TempBullet = b.get ( i );
 
                 if(TempBullet.getX () ==0 || TempBullet.getY ()==1200||TempBullet.getR ()==0 )
@@ -37,7 +44,8 @@ public class TankGameObjectHandler// it gets the objects in the game
                 TempBullet.update (object);
             }
 
-            for (int i= 0;i<bt.size ();i++){
+            for (int i= 0;i<bt.size ();i++)
+            {
                 TempBulletTank = bt.get ( i );
 
                 if(TempBulletTank.getX () ==0 || TempBulletTank.getY ()==1200||TempBulletTank.getR ()==0 )
@@ -45,6 +53,25 @@ public class TankGameObjectHandler// it gets the objects in the game
                 TempBulletTank.update (object);
             }
 
+            for (int i= 0;i<p.size ();i++)
+            {
+               powerUp = p.get ( i );
+
+                if(powerUp.getX () ==1300 )
+                    removePower ( powerUp );
+                powerUp.update (object);
+
+            }
+
+            for (int i= 0;i<bw.size ();i++)
+            {
+                Tempwall = bw.get ( i );
+
+                if(Tempwall.getX () ==1300 )
+                    removeWall ( Tempwall );
+                Tempwall.update (object);
+
+            }
 
 //            for(int i =0; i<h.size();i++){
 //                Temphealth = h.get ( i );
@@ -66,51 +93,87 @@ public class TankGameObjectHandler// it gets the objects in the game
                 tempObject.render ( g );
             }
 
-            for (int i= 0;i<b.size ();i++){
+            for (int i= 0;i<b.size ();i++)
+            {
                 TempBullet = b.get ( i );
 
                 TempBullet.render (g);
             }
 
-//            for (int i= 0;i<h.size ();i++){
-//                Temphealth = h.get ( i );
-//
-//                Temphealth.render (g);
-//            }
-            for (int i= 0;i<bt.size ();i++){
+            for (int i= 0;i<bt.size ();i++)
+            {
                 TempBulletTank = bt.get ( i );
 
                 TempBulletTank.render (g);
             }
+            for (int i= 0;i<p.size ();i++)
+            {
+                powerUp= p.get ( i );
+
+                powerUp.render (g);
+            }
+
+
+            for (int i= 0;i<bw.size ();i++)
+            {
+                Tempwall = bw.get ( i );
+
+                Tempwall.render (g);
+
+            }
+//        for (int i= 0;i<h.size ();i++){
+//                Temphealth = h.get ( i );
+//
+//                Temphealth.render (g);
+//            }
         }
 
-        public void addObject(TankGameObjects object){
+        public void addObject(TankGameObjects object)
+        {
             this.object.add(object); //"this." referes to the object linkedList
 
-
-
         }
 
-        public void  removeObject(TankGameObjects object){
+        public void  removeObject(TankGameObjects object)
+        {
             this.object.remove (object);
         }
 
 
-        public void addBullet(Bullet b){
+        public void addBullet(Bullet b)
+        {
             this.b.add(b);
         }
-        public void removeBullet(Bullet b){
+        public void removeBullet(Bullet b)
+        {
             this.b.remove (b);
-//            this.b.removeFirst ();
-//            this.b.removeLast ();
         }
-        public void addBulletTank(BulletTank bt){
+        public void addBulletTank(BulletTank bt)
+        {
             this.bt.add(bt);
         }
-        public void removeBulletTank(BulletTank bt){
+        public void removeBulletTank(BulletTank bt)
+        {
             this.bt.remove (bt);
-//            this.b.removeFirst ();
-//            this.b.removeLast ();
+
+        }
+        public void addPower(PowerUp p)
+        {
+            this.p.add(p);
+        }
+        public void removePower(PowerUp p)
+        {
+            this.p.remove (p);
+
+        }
+        public void addWall(BreakableWall bw)
+        {
+            this.bw.add(bw);
+        }
+        public void removeWall(BreakableWall bw)
+        {
+            this.bw.remove (bw);
+
         }
 
 //        public void addHealth(Health h){
@@ -121,10 +184,13 @@ public class TankGameObjectHandler// it gets the objects in the game
 ////            this.b.removeFirst ();
 ////            this.b.removeLast ();
 //        }
-        public void createLevel()
+
+        public void Walls()
         {
+
+
             for(int xx = 0; xx < tankGame.WIDTH; xx += 32)//Top
-                addObject(new Wall (xx,tankGame.HEIGHT-970 , ObjectId.Wall,game));
+                addObject(new Wall (xx,tankGame.HEIGHT-931 , ObjectId.Wall,game));
 
             for(int xx = 0; xx < tankGame.WIDTH; xx += 32)//bottom
                 addObject(new Wall (xx, tankGame.HEIGHT-32, ObjectId.Wall,game));
@@ -136,10 +202,10 @@ public class TankGameObjectHandler// it gets the objects in the game
                 addObject(new Wall(0, xx, ObjectId.Wall,game));
 
             for(int xx = 800; xx< tankGame.WIDTH-200; xx += 32) //middle block horizontal
-                addObject(new Wall(xx,300,ObjectId.Wall,game));
+                addObject(new Wall(xx,288,ObjectId.Wall,game));
 
             for(int xx = 800; xx< tankGame.WIDTH-200; xx += 32) //middle block horizontal
-                addObject(new Wall(xx,150, ObjectId.Wall,game));
+                addObject(new Wall(xx,128, ObjectId.Wall,game));
 
             for(int xx = 800; xx< tankGame.WIDTH-200; xx += 32) //middle block horizontal
                 addObject(new Wall(xx,700, ObjectId.Wall,game));
@@ -147,17 +213,17 @@ public class TankGameObjectHandler// it gets the objects in the game
             for(int xx = 100; xx< tankGame.WIDTH-1090; xx += 32) //middle block horizontal
                 addObject(new Wall(xx,450,ObjectId.Wall,game));
 
-            for(int xx = 400; xx< tankGame.WIDTH-770; xx += 32) //middle block horizontal
+            for(int xx = 384; xx< tankGame.WIDTH-780; xx += 32) //middle block horizontal
                 addObject(new Wall(xx,700, ObjectId.Wall,game));
 
 
-            for(int xx = 100; xx < tankGame.HEIGHT-500; xx += 32) //middle block vertical top rigth
-                addObject(new Wall(tankGame.WIDTH-400, xx,ObjectId.Wall,game));
+            for(int xx = 128; xx < tankGame.HEIGHT-500; xx += 32) //middle block vertical top rigth
+                addObject(new Wall(900, xx,ObjectId.Wall,game));
 
-            for(int xx = 100; xx < tankGame.HEIGHT-300; xx += 32) //middle block vertical middle
-                addObject(new Wall(tankGame.WIDTH-1000, xx, ObjectId.Wall,game));
+            for(int xx = 100; xx < tankGame.HEIGHT-300; xx += 32) //middle block vertical left far
+                addObject(new Wall(288, xx, ObjectId.Wall,game));
 
-            for(int xx = 400; xx < tankGame.HEIGHT-100; xx += 32) //middle block vertical left far
+            for(int xx = 412; xx < tankGame.HEIGHT-100; xx += 32)   //middle block vertical middle
                 addObject(new Wall(tankGame.WIDTH-700, xx, ObjectId.Wall,game));
 
 

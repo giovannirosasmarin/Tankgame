@@ -74,40 +74,82 @@ public class Tank extends TankGameObjects {
 
             if(tempObject .getId ()== ObjectId.Wall){
 
-                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                if(getBoundsTop ().intersects ( tempObject.getBounds () ))
+                {
                     y = (int) (tempObject.getY () + 32);
                     vy =0;
 
                 }
 
-                if(getBounds ().intersects ( tempObject.getBounds () )){
+                if(getBounds ().intersects ( tempObject.getBounds () ))
+                {
                     y = (int) (tempObject.getY ()- Tank2.getHeight ());
                     vy =0;
 
                 }
 
                 //right
-                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                if(getBoundsRight ().intersects ( tempObject.getBounds () ))
+                {
                     x = (int) (tempObject.getX ( ) - Tank2.getHeight ());
 
                 }
                 //left
-                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () ))
+                {
                     x = (int) (tempObject.getX ( ) + 35);
+
+                }
+
+            }
+            if(tempObject .getId ()== ObjectId.BreakableWall)
+            {
+
+                if(getBoundsTop ().intersects ( tempObject.getBounds () ))
+                {
+                    y = (int) (tempObject.getY () + 32);
+                    vy =0;
+
+
+
+                }
+
+                if(getBounds ().intersects ( tempObject.getBounds () ))
+                {
+                    y = (int) (tempObject.getY ()- Tank2.getHeight ());
+                    vy =0;
+
+
+                }
+
+                //right
+                if(getBoundsRight ().intersects ( tempObject.getBounds () ))
+                {
+                    x = (int) (tempObject.getX ( ) - Tank2.getHeight ());
+
+
+                }
+                //left
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () ))
+                {
+                    x = (int) (tempObject.getX ( ) + 35);
+
 
                 }
 
             }
             if(tempObject .getId ()== ObjectId.Enemy){
 
-                if(getBoundsTop ().intersects ( tempObject.getBounds () )){
+                if(getBoundsTop ().intersects ( tempObject.getBounds () ))
+                {
                     y = (int) (tempObject.getY () + 32);
                     vy =0;
                     vx=0;
 
                 }
 
-                if(getBounds ().intersects ( tempObject.getBounds () )){
+                if(getBounds ().intersects ( tempObject.getBounds () ))
+                {
                     y = (int) (tempObject.getY ()- Tank2.getHeight ());
                     vy =0;
                     vx=0;
@@ -115,14 +157,16 @@ public class Tank extends TankGameObjects {
                 }
 
                 //right
-                if(getBoundsRight ().intersects ( tempObject.getBounds () )) {
+                if(getBoundsRight ().intersects ( tempObject.getBounds () ))
+                {
                     x = (int) (tempObject.getX ( ) - Tank2.getHeight ());
 
                     vy =0;
                     vx=0;
                 }
                 //left
-                if(getBoundsLeft ().intersects ( tempObject.getBounds () )) {
+                if(getBoundsLeft ().intersects ( tempObject.getBounds () ))
+                {
                     x = (int) (tempObject.getX ( ) + 35);
                     vy =0;
                     vx=0;
@@ -164,8 +208,8 @@ public class Tank extends TankGameObjects {
         rotation.rotate(Math.toRadians(angle), Tank2.getWidth() / 2, Tank2.getHeight() / 2);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage( Tank2, rotation, null);
-        //this gives the bounds of the player
 
+        //this gives the bounds of the player
 //        g.setColor ( Color.RED );
 //        g2d.draw (getBounds()  );
 //        g2d.draw ( getBoundsTop() );

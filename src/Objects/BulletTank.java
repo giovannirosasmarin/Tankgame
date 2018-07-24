@@ -44,57 +44,46 @@ public class BulletTank extends TankGameObjects{
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBounds () )||
                         getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () )){
-
-
                     r=0;
                     y=1200;
                     x=0;
-
-
                 }
-
-
-
             }
             if(tempObject .getId ()== ObjectId.Enemy)
             {
 
                 if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBoundsTop ().intersects ( tempObject.getBoundsLeft () )||
                         getBoundsTop ().intersects ( tempObject.getBoundsRight () )||getBoundsTop ().intersects ( tempObject.getBoundsTop () )){
+
+                    tankGame.HealthEnemy -=10;
                     r=0;
                     y=1200;
                     x=0;
-                    tankGame.HealthEnemy -=10;
-
-                    if(tankGame.HealthEnemy ==0){
+                    if(tankGame.HealthEnemy ==0)
+                    {
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
 
                         System.out.println ( "Destroyed" );
                     }
-
-
-
-
                 }
 
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
                         getBounds ().intersects ( tempObject.getBoundsRight () )||getBounds().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.HealthEnemy  -=10;
-
-                    if(tankGame.HealthEnemy  ==0){
+                    r=0;
+                    y=1200;
+                    x=0;
+                    if(tankGame.HealthEnemy  ==0)
+                    {
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
 
                         System.out.println ( "Destroyed" );
                     }
-                    r=0;
-                    y=1200;
-                    x=0;
-
                 }
 
 
@@ -104,17 +93,17 @@ public class BulletTank extends TankGameObjects{
 
 
                     tankGame.HealthEnemy -=10;
-
-                    if(tankGame.HealthEnemy ==0){
+                    r=0;
+                    y=1200;
+                    x=0;
+                    if(tankGame.HealthEnemy ==0)
+                    {
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
 
                         System.out.println ( "Destroyed" );
                     }
-                    r=0;
-                    y=1200;
-                    x=0;
 
                 }
 
@@ -123,6 +112,9 @@ public class BulletTank extends TankGameObjects{
                         getBoundsLeft ().intersects ( tempObject.getBoundsRight () )||getBoundsLeft ().intersects ( tempObject.getBoundsTop () )){
 
                     tankGame.HealthEnemy -=10;
+                    r=0;
+                    y=1200;
+                    x=0;
                     if(tankGame.HealthEnemy ==0){
                         tempObject.setX( 150);
                         tempObject.setY (150);
@@ -130,34 +122,10 @@ public class BulletTank extends TankGameObjects{
 
                         System.out.println ( "Destroyed" );
                     }
-
-                    r=0;
-                    y=1200;
-                    x=0;
-
                 }
-
-
             }
         }
-//            if(tempObject .getId ()== ObjectId.Enemy){
-//
-//                if(getBoundsTop ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBounds () )||
-//                        getBoundsRight ().intersects ( tempObject.getBounds () )||getBoundsLeft ().intersects ( tempObject.getBounds () )){
-//
-//
-//                    r=0;
-//                    y=1200;
-//                    x=0;
-//
-//
-//                }
-//
-//
-//
-//            }
-
-        }
+    }
 
 @Override
     public Rectangle getBounds() {
@@ -176,7 +144,9 @@ public class BulletTank extends TankGameObjects{
     public Rectangle getBoundsLeft() {
         return new Rectangle ( (int)x+4,(int)y+10,5,bullet.getHeight ()-20 );
     }
-//@Override
+
+    //big rectangles not good for the small bullet that I drew
+    //@Override
 //public Rectangle getBounds() {
 //    return new Rectangle ( (int)(x)+(bullet.getWidth ()/2)-((bullet.getWidth ()/2)/2),(int)y+(bullet.getHeight ()/2),bullet.getWidth ()/2,bullet.getHeight ()/2 );
 //}
@@ -199,8 +169,6 @@ public class BulletTank extends TankGameObjects{
     public void render (Graphics g)
         {
 
-//            g.setColor ( Color.yellow);
-//            g.fillRect ( (int)x,(int)y,2,6 );
             AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
             rotation.rotate(Math.toRadians(angle), bullet.getWidth() / 2, bullet.getHeight() / 2);
             Graphics2D g2d = (Graphics2D) g;

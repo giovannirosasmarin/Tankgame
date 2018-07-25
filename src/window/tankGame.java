@@ -258,11 +258,11 @@ public class tankGame extends JPanel implements Runnable {
 
         Graphics2D g22 = (Graphics2D)g ;
         g22.drawImage ( world,0,0,null);
-//        BufferedImage lh = world.getSubimage ( 0,0,1280,960 );
-//        BufferedImage rh = world.getSubimage ( 1280/2,0,1280/2,960 );
+//        BufferedImage lh = world.getSubimage ( 0,0,640,960 );
+//        BufferedImage rh = world.getSubimage ( 0,0,640,960 );
         BufferedImage mm = world.getSubimage ( 0,0,1270,932 );  //minimap
 //        g22.drawImage ( lh,0,0, null  );
-//        g22.drawImage ( rh,1280/2,0, null  );
+//        g22.drawImage ( rh,640,0, null  );
         g22.scale ( .2,.2 );//minimap scale
         g22.drawImage ( mm, 2500,0, null ); //location of the minimap in the window
 

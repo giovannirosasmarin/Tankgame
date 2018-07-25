@@ -1,7 +1,6 @@
 package window;
 
 import Objects.*;
-
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -9,18 +8,19 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
     {
 
         private tankGame game;
-        public LinkedList<TankGameObjects> object = new LinkedList<TankGameObjects> (  );
-        private LinkedList<Bullet> b = new LinkedList<Bullet> (  );
+        public LinkedList<TankGameObjects> object = new LinkedList<TankGameObjects> (  ); //objects in tank game
+
+        private LinkedList<Bullet> b = new LinkedList<Bullet> (  ); //all the bullets shoot
         Bullet TempBullet;
 
-        private LinkedList<BulletTank> bt = new LinkedList<BulletTank> (  );
+        private LinkedList<BulletTank> bt = new LinkedList<BulletTank> (  ); //all the bullets shoot by tank
         BulletTank TempBulletTank;
 
 
-        private LinkedList<PowerUp> p= new LinkedList<> (  );
+        private LinkedList<PowerUp> p= new LinkedList<> (  ); //the health power ups in the game
         PowerUp powerUp;
 
-        private LinkedList<BreakableWall> bw= new LinkedList<> (  );
+        private LinkedList<BreakableWall> bw= new LinkedList<> (  ); //breakableWalls made one by one blocks
         BreakableWall Tempwall;
 
 
@@ -28,14 +28,14 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
 
         public void update()
         {
-            for (int i = 0; i< object.size (); i++)  //goes throw the list of object that we have in each update
+            for (int i = 0; i< object.size (); i++)  //goes through the list of object that we have in each update
             {
                 tempObject = object.get ( i );
 
                 tempObject.update ( object );
             }
 
-            for (int i= 0;i<b.size ();i++)
+            for (int i= 0;i<b.size ();i++)//goes through the list of Enemy bullets that we have in each update
             {
                 TempBullet = b.get ( i );
 
@@ -45,6 +45,7 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
             }
 
             for (int i= 0;i<bt.size ();i++)
+                                                //goes through the list of Tank bullets that we have in each update
             {
                 TempBulletTank = bt.get ( i );
 
@@ -53,7 +54,7 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
                 TempBulletTank.update (object);
             }
 
-            for (int i= 0;i<p.size ();i++)
+            for (int i= 0;i<p.size ();i++)    //goes through the list of health power ups  that we have in each update
             {
                powerUp = p.get ( i );
 
@@ -63,7 +64,7 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
 
             }
 
-            for (int i= 0;i<bw.size ();i++)
+            for (int i= 0;i<bw.size ();i++)     //goes through the list of breakable walls  that we have in each update
             {
                 Tempwall = bw.get ( i );
 
@@ -73,14 +74,6 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
 
             }
 
-//            for(int i =0; i<h.size();i++){
-//                Temphealth = h.get ( i );
-//
-//                if(Temphealth.getX () ==1 )
-//                    removeHealth ( Temphealth );
-//                Temphealth.update (object);
-//
-//        }
 
         }
 
@@ -90,27 +83,27 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
             {
                 tempObject = object.get ( i );
 
-                tempObject.render ( g );
+                tempObject.paint ( g );
             }
 
             for (int i= 0;i<b.size ();i++)
             {
                 TempBullet = b.get ( i );
 
-                TempBullet.render (g);
+                TempBullet.paint (g);
             }
 
             for (int i= 0;i<bt.size ();i++)
             {
                 TempBulletTank = bt.get ( i );
 
-                TempBulletTank.render (g);
+                TempBulletTank.paint (g);
             }
             for (int i= 0;i<p.size ();i++)
             {
                 powerUp= p.get ( i );
 
-                powerUp.render (g);
+                powerUp.paint (g);
             }
 
 
@@ -118,14 +111,10 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
             {
                 Tempwall = bw.get ( i );
 
-                Tempwall.render (g);
+                Tempwall.paint (g);
 
             }
-//        for (int i= 0;i<h.size ();i++){
-//                Temphealth = h.get ( i );
-//
-//                Temphealth.render (g);
-//            }
+
         }
 
         public void addObject(TankGameObjects object)
@@ -176,14 +165,6 @@ public class TankGameObjectHandler// it gets all the objects in the tank game
 
         }
 
-//        public void addHealth(Health h){
-//            this.h.add(h);
-//        }
-//        public void removeHealth(Health h){
-//            this.h.remove (h);
-////            this.b.removeFirst ();
-////            this.b.removeLast ();
-//        }
 
         public void Walls()
         {

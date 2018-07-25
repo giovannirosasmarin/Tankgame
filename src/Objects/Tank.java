@@ -54,7 +54,7 @@ public class Tank extends TankGameObjects {
         if(x<=0) //
             x=0;
         if(x>=1280-20)
-            x=12800-20;
+            x=1280-20;
         if (y<=0)
             y=0;
         if(y>=960-20)
@@ -201,7 +201,7 @@ public class Tank extends TankGameObjects {
 
 
     @Override
-    public void render(Graphics g) {
+    public void paint(Graphics g) {
 
 
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);

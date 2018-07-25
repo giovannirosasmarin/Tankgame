@@ -21,7 +21,7 @@ public class Wall extends TankGameObjects {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void paint(Graphics g) {
         Color brown = new Color(192,128,64); //color fill of the breakablewall
         g.setColor(brown);
         g.fillRect  ( (int) x, (int) y, 32, 32 );

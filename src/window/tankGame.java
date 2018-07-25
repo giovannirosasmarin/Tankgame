@@ -6,14 +6,14 @@ import framework.keyInput;
 
 import javax.swing.*;
 import java.awt.*; //canvas
-import java.awt.image.BufferStrategy;
+import java.awt.image.BufferStrategy; //not needed any more because changed to JPanel
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class tankGame extends JPanel implements Runnable {
 
-    private boolean running = false;
-    private Thread thread;
+    private static boolean running = false;
+    private static Thread thread;
 
     private BufferedImage spriteSheet = null; //tank.png spritesheet
     private BufferedImage background = null;// background of the window
@@ -21,6 +21,8 @@ public class tankGame extends JPanel implements Runnable {
     public static int WIDTH, HEIGHT;
     public static  int Health = 100*2;
     public static  int HealthEnemy = 100*2;
+    public static int Live =0;
+    public static int LiveEnemy=0;
 
     public static int LifeCount =1*30;
     public static int LifeCount2=1*30;
@@ -63,9 +65,9 @@ public class tankGame extends JPanel implements Runnable {
 
         objectHandler = new TankGameObjectHandler ();
 
-        objectHandler.addObject ( new Tank ( 1180, 860, 0, 0, (short)-90, objectHandler,ObjectId.Tank,this ) );
+        objectHandler.addObject ( new Tank ( 150, 150, 0, 0, (short)90, objectHandler,ObjectId.Tank,this ) );
 //        objectHandler.addObject ( new Tank ( 100, 100, 0, 0, (short)-90, objectHandler,ObjectId.Tank,this ) );  //test for collision between tanks
-        objectHandler.addObject ( new Enemy ( 150, 150, 0, 0, (short)90,objectHandler,ObjectId.Enemy,this ) );
+        objectHandler.addObject ( new Enemy ( 1180, 860, 0, 0, (short)-90,objectHandler,ObjectId.Enemy,this ) );
 //        objectHandler.addObject ( new Bullet ( 180,180,(short)0, objectHandler,ObjectId.Bullet,this));
 
 //HealthPowerUp
@@ -123,7 +125,7 @@ public class tankGame extends JPanel implements Runnable {
 
     //---------------------------------------------------------------------------------------
     //not needed has much
-    public synchronized void stop()
+    public static synchronized void stop()
     {
         if(!running) //if running its false it will get out of the method
             return;
@@ -202,8 +204,8 @@ public class tankGame extends JPanel implements Runnable {
         g2.fillRect ( 40, 36, 200, 25 );
         g2.setColor ( Color.green );
         g2.fillRect ( 40, 36, Health, 25 );
-        g2.setColor ( Color.white );
-        g2.drawRect ( 40, 36, 200, 25 );
+//        g2.setColor ( Color.white );
+//        g2.drawRect ( 40, 36, 200, 25 );
 
 
 
@@ -212,53 +214,46 @@ public class tankGame extends JPanel implements Runnable {
         g2.fillRect ( 900,36 ,200,25);
         g2.setColor ( Color.green );
         g2.fillRect ( 900,36 ,HealthEnemy,25);
-        g2.setColor ( Color.white );
-        g2.drawRect ( 900,36 ,200,25);
+//        g2.setColor ( Color.white );
+//        g2.drawRect ( 900,36 ,200,25);
 
 
 
 ////Lives for tank ???? can figure it out still
         g2.setColor(Color.gray);
         g2.fillOval ( 40, 63,30,30 );
-        g2.setColor(Color.blue);
+        g2.setColor(Color.RED);
         g2.fillOval ( 40, 63,LifeCount,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 40, 63,30,30 );
+
 
         g2.setColor(Color.gray);
         g2.fillOval ( 80, 63,30,30 );
-        g2.setColor(Color.blue);
+        g2.setColor(Color.red);
         g2.fillOval ( 80, 63,LifeCount2,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 80, 63,30,30 );
-//Enemy Lives
+
         g2.setColor(Color.gray);
         g2.fillOval ( 120, 63,30,30 );
-        g2.setColor(Color.blue);
+        g2.setColor(Color.red);
         g2.fillOval ( 120, 63,LifeCount3,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 120, 63,30,30 );
 
+//Enemy Lives
         g2.setColor(Color.gray);
         g2.fillOval ( 1000, 63,30,30 );
         g2.setColor(Color.blue);
         g2.fillOval ( 1000, 63,LifeCountEnemy0,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 1000, 63,30,30 );
+
 
         g2.setColor(Color.gray);
         g2.fillOval ( 1040, 63,30,30 );
         g2.setColor(Color.blue);
         g2.fillOval ( 1040, 63,LifeCountEnemy,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 1040, 63,30,30 );
+
 
         g2.setColor(Color.gray);
         g2.fillOval ( 1080, 63,30,30 );
         g2.setColor(Color.blue);
         g2.fillOval ( 1080, 63,LifeCountEnemy2,30 );
-        g2.setColor(Color.WHITE);
-        g2.drawOval ( 1080, 63,30,30 );
+
 
 
         Graphics2D g22 = (Graphics2D)g ;
@@ -268,7 +263,7 @@ public class tankGame extends JPanel implements Runnable {
         BufferedImage mm = world.getSubimage ( 0,0,1270,932 );  //minimap
 //        g22.drawImage ( lh,0,0, null  );
 //        g22.drawImage ( rh,1280/2,0, null  );
-        g22.scale ( .2,.2 );//minimap scalecx
+        g22.scale ( .2,.2 );//minimap scale
         g22.drawImage ( mm, 2500,0, null ); //location of the minimap in the window
 
         ////////////////////////////////
@@ -277,7 +272,7 @@ public class tankGame extends JPanel implements Runnable {
 
     }
 //---------------------------------------------------------------------------------------
-    private void update()//everything in the game that updates
+    private void update() //everything in the game that updates
     {
         objectHandler.update();
     }
@@ -288,6 +283,7 @@ public class tankGame extends JPanel implements Runnable {
         tankGame tg = new tankGame ();
         tg.init ();
         tg.start ();
+
         //new Window ( 1280, 960,"Tank Game", new tankGame () ); // initializing the window
 
     }

@@ -3,7 +3,6 @@ package Objects;
 import Animacion.SpriteSheet;
 import window.TankGameObjectHandler;
 import window.tankGame;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -76,9 +75,25 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
-
+                        tankGame.LiveEnemy ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
                     }
+                    if(tankGame.LiveEnemy ==1){
+                        tankGame.LifeCountEnemy0-=30;
+                    }
+                    if(tankGame.LiveEnemy ==2){
+                        tankGame.LifeCountEnemy-=30;
+                    }
+                    if(tankGame.LiveEnemy ==3){
+                        tankGame.LifeCountEnemy2-=30;
+                    }
+                    if(tankGame.LiveEnemy ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
+                    }
+
                 }
 
                 if(getBounds ().intersects ( tempObject.getBounds () )||getBounds ().intersects ( tempObject.getBoundsLeft () )||
@@ -94,7 +109,24 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
 
+                        tankGame.LiveEnemy ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                    }
+                    if(tankGame.LiveEnemy ==1){
+                        tankGame.LifeCountEnemy0-=30;
+                    }
+                    if(tankGame.LiveEnemy ==2){
+                        tankGame.LifeCountEnemy-=30;
+                    }
+                    if(tankGame.LiveEnemy ==3){
+                        tankGame.LifeCountEnemy2-=30;
+
+                    }
+                    if(tankGame.LiveEnemy ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
                     }
                 }
 
@@ -113,8 +145,24 @@ public class BulletTank extends TankGameObjects{
                         tempObject.setX( 150);
                         tempObject.setY (150);
                         tankGame.HealthEnemy =100*2;
-
+                        tankGame.LiveEnemy ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                    }
+                    if(tankGame.LiveEnemy ==1){
+                        tankGame.LifeCountEnemy0-=30;
+                    }
+                    if(tankGame.LiveEnemy ==2){
+                        tankGame.LifeCountEnemy-=30;
+                    }
+                    if(tankGame.LiveEnemy ==3){
+                        tankGame.LifeCountEnemy2-=30;
+
+                    }
+                    if(tankGame.LiveEnemy ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
                     }
 
                 }
@@ -130,9 +178,24 @@ public class BulletTank extends TankGameObjects{
                     if(tankGame.HealthEnemy ==0){
                         tempObject.setX( 150);
                         tempObject.setY (150);
-                        tankGame.HealthEnemy =100*2;
-
+                        tankGame.LiveEnemy ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                    }
+                    if(tankGame.LiveEnemy ==1){
+                        tankGame.LifeCountEnemy0-=30;
+                    }
+                    if(tankGame.LiveEnemy ==2){
+                        tankGame.LifeCountEnemy-=30;
+                    }
+                    if(tankGame.LiveEnemy ==3){
+                        tankGame.LifeCountEnemy2-=30;
+
+                    }
+                    if(tankGame.LiveEnemy ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
                     }
                 }
             }
@@ -178,7 +241,7 @@ public class BulletTank extends TankGameObjects{
 
 
     @Override
-    public void render (Graphics g)
+    public void paint(Graphics g)
         {
 
             AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);

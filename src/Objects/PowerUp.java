@@ -107,7 +107,7 @@ public class PowerUp extends TankGameObjects{
     }
 
     @Override
-    public void render(Graphics g) {
+    public void paint(Graphics g) {
 
 
         g.setColor(Color.RED);

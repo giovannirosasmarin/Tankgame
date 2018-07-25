@@ -1,13 +1,11 @@
 package framework;
 
 import Objects.Bullet;
-
 import Objects.BulletTank;
 import Objects.ObjectId;
 import Objects.TankGameObjects;
 import window.TankGameObjectHandler;
 import window.tankGame;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -31,7 +29,7 @@ public class keyInput extends KeyAdapter
         {
             TankGameObjects tempObject = objectHandler.object.get ( i );
 
-            if(tempObject.getId () == ObjectId.Tank)
+            if(tempObject.getId () == ObjectId.Enemy)
             {
                 if(key == KeyEvent.VK_RIGHT) {
                     tempObject.toggleRightPressed ();
@@ -41,13 +39,14 @@ public class keyInput extends KeyAdapter
                     tempObject.toggleDownPressed ();
                 } else if(key == KeyEvent.VK_UP) {
                     tempObject.toggleUpPressed ();
-                }else if(key == KeyEvent.VK_NUMPAD0 && !isShooting){
-                    isShooting = true;
-                    objectHandler.addObject ( new BulletTank ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.BulletTank,game ) );
+                }else if(key == KeyEvent.VK_NUMPAD0 && !isShootingEnemy){
+
+                    isShootingEnemy = true;
+                    objectHandler.addObject ( new Bullet ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.Bullet,game ) );
                 }
             }
 
-            if(tempObject.getId () == ObjectId.Enemy)
+            if(tempObject.getId () == ObjectId.Tank)
             {
                 if(key == KeyEvent.VK_D) {
                     tempObject.toggleRightPressed ();
@@ -57,10 +56,10 @@ public class keyInput extends KeyAdapter
                     tempObject.toggleDownPressed ();
                 } else if(key == KeyEvent.VK_W) {
                     tempObject.toggleUpPressed ();
-                }else if(key == KeyEvent.VK_SPACE&& !isShootingEnemy){
-                    isShootingEnemy = true;
-                    objectHandler.addObject ( new Bullet ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.Bullet,game ) );
-                }
+                }else if(key == KeyEvent.VK_SPACE&& !isShooting){
+                    isShooting = true;
+                    objectHandler.addObject ( new BulletTank ( (int)tempObject.getX (),(int)tempObject.getY (),(short)tempObject.getAngle(), objectHandler,ObjectId.BulletTank,game ) );
+               }
             }
 
 
@@ -81,7 +80,7 @@ public class keyInput extends KeyAdapter
         {
             TankGameObjects tempObject = objectHandler.object.get ( i );
 
-            if(tempObject.getId () == ObjectId.Tank)
+            if(tempObject.getId () == ObjectId.Enemy)
             {
                 if(key == KeyEvent.VK_RIGHT) {
                     tempObject.unToggleRightPressed ();
@@ -92,11 +91,12 @@ public class keyInput extends KeyAdapter
                 } else if(key == KeyEvent.VK_UP) {
                     tempObject.unToggleUpPressed ();
                 } else if(key == KeyEvent.VK_NUMPAD0) {
-                    isShooting = false;
+
+                    isShootingEnemy = false;
                 }
 
             }
-            if(tempObject.getId () == ObjectId.Enemy)
+            if(tempObject.getId () == ObjectId.Tank)
             {
                 if(key == KeyEvent.VK_D) {
                     tempObject.unToggleRightPressed ();
@@ -107,7 +107,7 @@ public class keyInput extends KeyAdapter
                 } else if(key == KeyEvent.VK_W) {
                     tempObject.unToggleUpPressed ();
                 } else if(key == KeyEvent.VK_SPACE) {
-                    isShootingEnemy = false;
+                    isShooting = false;
                 }
 
 

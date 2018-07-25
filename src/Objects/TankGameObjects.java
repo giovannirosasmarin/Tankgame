@@ -41,7 +41,7 @@ public abstract class TankGameObjects {
 
     public abstract Rectangle getBoundsLeft();
 
-    public abstract void render(Graphics g);
+    public abstract void paint(Graphics g);
 
 
 

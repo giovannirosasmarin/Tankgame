@@ -84,8 +84,24 @@ public class Bullet extends TankGameObjects{
                         tempObject.setX ( 1180 );
                         tempObject.setY ( 860 );
                         tankGame.Health = 100 * 2;
-                        lives++;
+                        tankGame.Live ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                    }
+                    if(tankGame.Live ==1){
+                        tankGame.LifeCount-=30;
+                    }
+                    if(tankGame.Live ==2){
+                        tankGame.LifeCount2-=30;
+                    }
+                    if(tankGame.Live ==3){
+                        tankGame.LifeCount3-=30;
+
+                    }
+                    if(tankGame.Live ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
                     }
 
                 }
@@ -102,8 +118,24 @@ public class Bullet extends TankGameObjects{
                         tempObject.setX ( 1180 );
                         tempObject.setY ( 860 );
                         tankGame.Health = 100 * 2;
-
+                        tankGame.Live ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                    }
+                    if(tankGame.Live ==1){
+                        tankGame.LifeCount-=30;
+                    }
+                    if(tankGame.Live ==2){
+                        tankGame.LifeCount2-=30;
+                    }
+                    if(tankGame.Live ==3){
+                        tankGame.LifeCount3-=30;
+
+                    }
+                    if(tankGame.Live ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
                     }
 
 
@@ -121,9 +153,26 @@ public class Bullet extends TankGameObjects{
                         tempObject.setX ( 1180 );
                         tempObject.setY ( 860 );
                         tankGame.Health = 100 * 2;
-
+                        tankGame.Live ++;
                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
                     }
+                    if(tankGame.Live ==1){
+                        tankGame.LifeCount-=30;
+                    }
+                    if(tankGame.Live ==2){
+                        tankGame.LifeCount2-=30;
+                    }
+                    if(tankGame.Live ==3){
+                        tankGame.LifeCount3-=30;
+
+                    }
+                    if(tankGame.Live ==4){
+
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
+                    }
+
                 }
 
                 //left
@@ -141,10 +190,25 @@ public class Bullet extends TankGameObjects{
                             tempObject.setX ( 1180 );
                             tempObject.setY ( 860 );
                             tankGame.Health = 100 * 2;
+                         tankGame.Live ++;
+                         System.out.println ( "Destroyed" );
+//                        tankGame.stop();
+                     }
+                    if(tankGame.Live ==1){
+                        tankGame.LifeCount-=30;
+                    }
+                    if(tankGame.Live ==2){
+                        tankGame.LifeCount2-=30;
+                    }
+                    if(tankGame.Live ==3){
+                        tankGame.LifeCount3-=30;
 
-                            System.out.println ( "Destroyed" );
+                    }
+                    if(tankGame.Live ==4){
 
-                      }
+                        System.out.println ( "Tank Lost" );
+                        tankGame.stop();
+                    }
                 }
             }
        }
@@ -189,13 +253,12 @@ public class Bullet extends TankGameObjects{
 
 
     @Override
-    public void render (Graphics g)
+    public void paint(Graphics g)
         {
 
             AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
             rotation.rotate(Math.toRadians(angle), bullet.getWidth() / 2, bullet.getHeight() / 2);
             Graphics2D g2d = (Graphics2D) g;
-
             g2d.drawImage( bullet, rotation, null);
 
             //this gives the bounds of the player
